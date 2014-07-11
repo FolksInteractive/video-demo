@@ -1,0 +1,25 @@
+.header{
+	background: url(/img/Modele-Conference1.png) no-repeat;
+	background-size: 100% auto;
+  	.head .logo{
+	      padding: 20px;
+	      float: left;
+	 }
+	 .head .dropdown{
+		float:right;
+		list-style: none;
+		padding-top:20px;
+		padding-right:20px;
+	}
+	.icon{
+	  	padding-left: 20px;
+	 }
+	 .dropdown-toggle{
+	 	display: inline-block;
+	 }
+	 img{
+	 	&:hover{
+	 		opacity:0.9;
+	 	}
+	 }
+}

@@ -1,0 +1,156 @@
+#video-box{
+	.modal-body{
+		padding:0;
+	}
+	.video-player{
+		padding:0;
+	}
+	.discussion{
+		.header{
+			border-bottom: 1px solid #f3f5f7;
+		}
+		.title{
+			font-size: 14px;
+			color:#3b4144;
+			height: 47px;
+			line-height: 47px;
+			margin:0;
+			font-family: "Helvetica Neue 75 Bold";
+		}
+		.count{
+			color:#3b4144;
+			opacity:0.5;
+			font-size: 14px;
+			float:right;
+		}
+		.comments-wrapper{
+			max-height: 288px;
+			overflow-x:hidden;
+			overflow-y: auto;
+
+		}
+		.comments-wrapper::-webkit-scrollbar
+		{
+		  width: 5px;  
+		}
+
+		.comments-wrapper::-webkit-scrollbar-track
+		{
+		  background: rgba(0, 0, 0, 0.1);
+		}
+
+		.comments-wrapper::-webkit-scrollbar-thumb
+		{
+		  background: rgba(0, 0, 0, 0.3);
+		}
+		.comment{
+			border-bottom: 1px solid #f3f5f7;
+			padding: 15px 0 18px 0;
+			.avatar{
+				position: relative;
+				width: 37px;
+				height: 37px;
+				margin: 0 auto;
+				&:after{
+						content: ' ';
+						position: absolute;
+						width: 10px;
+						height: 10px;
+						border-radius: 10px;
+						border: 2px solid #fff;
+						right: 1px;
+						bottom: 0px;
+					}
+				&.online:after{
+					background: #00ad89;
+				}
+				&.idle:after{
+					background: #ffc333;
+				}
+				&.busy:after{
+					background: #ea3341;
+				}
+				img{
+
+				}
+			}
+			.comment-text{
+				padding-left:0;
+				p{
+					margin:0;
+				}
+				.name{
+					color:#343535;
+					font-size:14px;
+					font-family: "Helvetica Neue 55 Roman";
+				}
+				.message{
+					color:#3b4144;
+					font-size:14px;
+					font-weight: 300;
+					font-family: "Helvetica Neue 25 UltraLight";
+				}
+			}
+
+		}
+		.post-comment{
+			background:#eceff4;
+			.poster-image{
+				img{
+					float:right;
+					margin-top: 6px;
+					margin-bottom: 4px;
+				}
+			}
+			.input{
+				padding-left:0;
+				padding-top: 9px;
+				input[type="text"]{
+					border-radius: 0;
+					border: 1px solid #bcc8d8;
+					height: 22px;
+					padding: 0 6px;
+					width: 100%;
+				}
+				input[type="submit"]{
+					border: 0;
+					background: transparent;
+					text-indent: -999px;
+					background:url(../img/camera.png) no-repeat;
+					width: 17px;
+					height: 13px;
+					position: absolute;
+					right: 19px;
+					top: 14px;
+
+				}
+
+			}
+		}
+	}
+}
+.modal-backdrop {
+	background: rgba(12, 12, 12, 0.95);
+	opacity:1; 
+	&.in{
+		opacity:1; 
+	}
+}
+
+@media (min-width: $screen-md-min){
+	#video-box{
+		.modal-dialog{
+			margin:142px auto 30px auto;
+		}
+	}
+}
+
+
+
+@media (min-width: $screen-lg-min){
+	#video-box{
+		.modal-lg {
+			width: 1028px;
+		}
+	}
+}
