@@ -3,6 +3,12 @@ Router.configure({
   layoutTemplate: 'layout',
   yieldTemplates: {
     'header': {to: 'header'}
+  },    
+  onBeforeAction: function(pause) {
+    if (!(Meteor.loggingIn() || Meteor.user())) {
+      this.render('home');
+      pause();
+    }
   }
 });
 

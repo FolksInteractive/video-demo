@@ -9,3 +9,6 @@ insecure
 iron-router
 scss
 bootstrap3-sass
+accounts-base
+accounts-password
+accounts-ui
