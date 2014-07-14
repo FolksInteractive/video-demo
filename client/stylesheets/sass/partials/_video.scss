@@ -1,4 +1,4 @@
-.step3{
+.video{
   background: url(/img/tech_bg.png);
   background-size:100% auto; 
   overflow: auto;
@@ -116,14 +116,14 @@
 }
 
 @media (max-width: $screen-md-max) {
-   .step3{
+   .video{
     .scrolled-up{
       height: auto !important;
     }
    }
 }
 @media (min-width: $screen-lg-min) {
-  .step3{
+  .video{
     .info{
         h2{
             text-align:right;
@@ -146,7 +146,7 @@
 }
 
 @media (min-width: $screen-md-max) {
-  .step3{
+  .video{
     .info{
       h2{
          margin: 70px 0 42px 0;

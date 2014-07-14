@@ -13,3 +13,7 @@ if (Meteor.users.find().count() === 0) {
   });
   Meteor.logout();
 }
+
+if (Videos.find().count() === 0) {
+
+}

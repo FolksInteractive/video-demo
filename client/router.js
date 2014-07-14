@@ -16,17 +16,21 @@ Router.map(function () {
   this.route('home', {
     path: '/',
     template: 'home',
-    layoutTemplate: 'homeLayout'
+    layoutTemplate: 'homeLayout',
+    onAfterAction: function() {
+      if(!!Meteor.user())
+        Router.go('videosList');
+    }
   });
 
-  this.route('step2', {
-    path: '/step2',
-    template: 'step2'
+  this.route('videosList', {
+    path: '/videos',
+    template: 'videosList'
   });
 
-  this.route('step3', {
-    path: '/step3',
-    template: 'step3'
+  this.route('video', {
+    path: '/video',
+    template: 'video'
   });
 
 });
