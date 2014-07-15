@@ -24,6 +24,9 @@ Template.video.helpers({
 
 Template.chapter.events({
   'click a': function() {
+    var completed = Meteor.user().profile.watchedChapters;
+    completed.push(this._id);
+    Meteor.users.update({_id: Meteor.user()._id}, {$set: {"profile.watchedChapters": completed}});
     var video = Videos.findOne(Session.get('currentVideoId'));
     player.cueVideoById(video.youtubeId, this.timeStamp);
     player.playVideo();
