@@ -29,8 +29,11 @@ Router.map(function () {
   });
 
   this.route('video', {
-    path: '/video',
-    template: 'video'
+    path: '/video/:id',
+    template: 'video',
+    onBeforeAction: function() {
+      Session.set('currentVideoId', this.params.id);
+    }
   });
 
 });

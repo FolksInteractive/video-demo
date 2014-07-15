@@ -1,42 +1,3 @@
-Template.video.created = function () {
-  if (typeof player === 'undefined')
-    $.getScript('https://www.youtube.com/iframe_api', function () {});
-};
-
-Template.video.rendered = function() {
-  Session.set('channelRendered', true);
-};
-
-Template.video.destroyed = function () {
-  Session.set('channelRendered', false);
-};
-
-Deps.autorun(function (c) {
-  if (Session.equals('YTApiReady', false) ||
-    Session.equals('channelRendered', false)) {
-    return;
-}
-
-var interval = Meteor.setInterval(function () {
-  if(!document.getElementById('player')) {
-    return;
-  }
-  var playerDiv = document.createElement('div');
-
-  playerDiv.id = 'player';
-  document.getElementById('player-parent').innerHTML = '';
-  document.getElementById('player-parent').appendChild(playerDiv);
-  player = null;
-  player = new YT.Player('player', {
-    videoId: "HKCH8HsdcOA"
-  });
-
-  // player.loadVideoByUrl({mediaContentUrl: "http://www.youtube.com/embed/HKCH8HsdcOA"});
-  console.log(player);
-  Meteor.clearInterval(interval);
-}, 100);
-});
-
 //Scroll helper
 Template.video.helpers({
   rendered: function() {
@@ -52,5 +13,25 @@ Template.video.helpers({
           }});
       $('.videos-list').removeClass('visible-xs');
     });
+  },
+  video: function() {
+    return Videos.findOne(Session.get('currentVideoId'));
+  },
+  chapters: function() {
+    return Chapters.find({'_id': {$in: this.chapters}});
   }
 });
+
+Template.chapter.events({
+  'click a': function() {
+    var video = Videos.findOne(Session.get('currentVideoId'));
+    player.cueVideoById(video.youtubeId, this.timeStamp);
+    player.playVideo();
+  }
+});
+
+Template.videoModal.rendered = function() {
+  $('.modal').on('hidden.bs.modal', function () {
+    player.pauseVideo();
+  });
+}
