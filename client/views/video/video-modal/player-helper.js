@@ -6,6 +6,7 @@ Meteor.startup(function () {
 onYouTubeIframeAPIReady = function() {
   Session.set('YTApiReady', true);
 };
+
 Template.videoModal.created = function () {
   if (typeof player === 'undefined')
     $.getScript('https://www.youtube.com/iframe_api', function () {});
@@ -27,25 +28,25 @@ Deps.autorun(function (c) {
 
   var interval = Meteor.setInterval(function () {
   
-  if(!document.getElementById('player')) {
-    return;
-  }
-  
-  var playerDiv = document.createElement('div');
-
-  playerDiv.id = 'player';
-  document.getElementById('player-parent').innerHTML = '';
-  document.getElementById('player-parent').appendChild(playerDiv);
-
-  player = null;
-  player = new YT.Player('player', {
-    events: {
-      'onStateChange': function(state) {
-        Session.set('playerState', state.data);
-      }
+    if(!document.getElementById('player')) {
+      return;
     }
-  });
+    
+    var playerDiv = document.createElement('div');
 
-  Meteor.clearInterval(interval);
-}, 100);
+    playerDiv.id = 'player';
+    document.getElementById('player-parent').innerHTML = '';
+    document.getElementById('player-parent').appendChild(playerDiv);
+
+    player = null;
+    player = new YT.Player('player', {
+      events: {
+        'onStateChange': function(state) {
+          Session.set('playerState', state.data);
+        }
+      }
+    });
+
+    Meteor.clearInterval(interval);
+  }, 100);
 });

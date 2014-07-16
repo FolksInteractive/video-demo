@@ -1,97 +1,52 @@
 <template name="video">
   <div class="video">
     {{#with video}}
-    <div class="clear-fix"></div>
-    <div class="container do-scroll-up">
-      <div class="row scrolled">
-        <div class="col-md-8 name">
-          <h1>Andre Bisson</h1>
-          <p>Coordonateur des partenariats avec l’industrie a la FDETS</p>
-        </div>
-        <div class="col-md-8 info">
-          <h2>{{title}}</h2>
-        </div>
-      </div>
-
-      <div class="scrolled-hide">
-        <div class="row">
-          <div class="  col-lg-10 col-lg-push-6 info">
-            <h2>{{title}}</h2>
-            <p class="message"><span class="arrow left">&laquo;</span>Un must pour tous les entrepreneurs d’aujourd’hui et de demain<span class="arrow right">&raquo;</span>
-            </p>
-            <p class="name">Alex Le Moëligou – <span class="job">Président Fondateur TimeCrumbs</span></p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-8 col-lg-push-7 text-center">
-            <a href="#" id="scrollup" class="btn green big btn-default">Débuter la conference</a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="bottom name">
+      <div class="clear-fix"></div>
+      <div class="container do-scroll-up">
+        <div class="row scrolled">
+          <div class="col-md-8 name">
             <h1>Andre Bisson</h1>
-            <p>Coordonateur des partenariats avec l’industrie à la FDETS</p>
+            <p>Coordonateur des partenariats avec l’industrie a la FDETS</p>
+          </div>
+          <div class="col-md-8 info">
+            <h2>{{title}}</h2>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="videos-list visible-xs">
-      <div class="container">
-        {{#each chapters}}
-        {{> chapter}}
-        {{/each}}
-      </div>
-    </div>
+        <div class="scrolled-hide">
+          <div class="row">
+            <div class="  col-lg-10 col-lg-push-6 info">
+              <h2>{{title}}</h2>
+              <p class="message"><span class="arrow left">&laquo;</span>Un must pour tous les entrepreneurs d’aujourd’hui et de demain<span class="arrow right">&raquo;</span>
+              </p>
+              <p class="name">Alex Le Moëligou – <span class="job">Président Fondateur TimeCrumbs</span></p>
+            </div>
+          </div>
 
-    {{> videoModal this}}
-    {{/with}}
-  </div>
-</template>
+          <div class="row">
+            <div class="col-lg-8 col-lg-push-7 text-center">
+              <a href="#" id="scrollup" class="btn green big btn-default">Débuter la conference</a>
+            </div>
+          </div>
 
-<template name="chapter">
-  <div class="row video-row">
-
-    <div class="col-md-12 col-md-push-2">
-      <div class=" col-md-4 col-sm-4 vedio">
-        {{#if completed}}
-          <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
-            <img src="/img/video.jpg" alt="" />
-          </a>
-        {{else}}
-          <a href="#" class="thumb" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
-            <img src="/img/video.jpg" alt="" />
-          </a>
-        {{/if}}
-      </div>
-      <div class=" col-md-12 col-sm-12 vedio">
-        <h2 class="title">{{title}}</h2>
-        <p class="details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elit sit amet elit placerat sodales quis sed dolor. Quisque non malesuada metus...</p>
-        <span class="comments"><img src="/img/comments.png" alt="" /> 29 commentaires</span>
-      </div>
-    </div>
-
-  </div> 
-</template>
-
-<template name="videoModal">
-  <div class="modal fade" id="video-box" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="video-box">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-10 video-player" id="player-parent">
-                <div id="player"></div>
-              </div>
-              {{> comments}}
+          <div class="row">
+            <div class="bottom name">
+              <h1>Andre Bisson</h1>
+              <p>Coordonateur des partenariats avec l’industrie à la FDETS</p>
             </div>
           </div>
         </div>
-
       </div>
-    </div>
+
+      <div class="videos-list visible-xs">
+        <div class="container">
+          {{#each chapters}}
+          {{> chapter}}
+          {{/each}}
+        </div>
+      </div>
+
+      {{> videoModal this}}
+    {{/with}}
   </div>
 </template>

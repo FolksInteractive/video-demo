@@ -1,0 +1,22 @@
+<template name="chapter">
+  <div class="row video-row">
+    <div class="col-md-12 col-md-push-2">
+      <div class=" col-md-4 col-sm-4 vedio">
+        {{#if completed}}
+          <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
+            <img src="/img/video.jpg" alt="" />
+          </a>
+        {{else}}
+          <a href="#" class="thumb" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
+            <img src="/img/video.jpg" alt="" />
+          </a>
+        {{/if}}
+      </div>
+      <div class=" col-md-12 col-sm-12 vedio">
+        <h2 class="title">{{title}}</h2>
+        <p class="details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elit sit amet elit placerat sodales quis sed dolor. Quisque non malesuada metus...</p>
+        <span class="comments"><img src="/img/comments.png" alt="" /> 29 commentaires</span>
+      </div>
+    </div>
+  </div> 
+</template>

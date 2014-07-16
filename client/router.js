@@ -4,6 +4,7 @@ Router.configure({
   yieldTemplates: {
     'header': {to: 'header'}
   },    
+  notFoundTemplate: 'notFound',
   onBeforeAction: function(pause) {
     if (!(Meteor.loggingIn() || Meteor.user())) {
       this.render('home');
@@ -32,8 +33,16 @@ Router.map(function () {
     path: '/video/:id',
     template: 'video',
     onBeforeAction: function() {
-      Session.set('currentVideoId', this.params.id);
+      if(!!Videos.findOne(this.params.id))
+        Session.set('currentVideoId', this.params.id);
+      else
+        Router.go('notFound');
     }
+  });
+
+  this.route('notFound', {
+    template: 'notFound',
+    path: '/not-found'
   });
 
 });

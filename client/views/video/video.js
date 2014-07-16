@@ -1,4 +1,3 @@
-// SCROLL HELPER - VIDEO
 Template.video.helpers({
   rendered: function() {
     $('#scrollup').click(function(e){
@@ -21,61 +20,3 @@ Template.video.helpers({
     return Chapters.find({'_id': {$in: this.chapters}});
   }
 });
-
-// CHAPTER
-var playerState;
-Template.chapter.events({
-  'click a': function() {
-    var subscription = Subscriptions.findOne({userId: Meteor.userId(), 
-      videoId: Session.get('currentVideoId')});
-    var completedChapters = subscription.completedChapters;
-
-    if(completedChapters.indexOf(this._id) === -1) {
-      completedChapters.push(this._id);
-      Subscriptions.update(subscription._id, {$set: {"completedChapters": completedChapters}})
-    }
-
-    var video = Videos.findOne(Session.get('currentVideoId'));
-    player.cueVideoById(video.youtubeId, this.timeStamp);
-    player.playVideo();
-
-    Session.set('currentChapterId',this._id);
-    Meteor.setInterval(chapterChange,10000);//Call every 100sec
-  }
-});
-
-Template.chapter.completed = function() {
-  var currentId = this._id;
-  var completedChapters = Subscriptions.findOne({userId: Meteor.userId(), 
-    videoId: Session.get('currentVideoId')}).completedChapters;
-  var matching = completedChapters.filter(function(chapter) {
-    return currentId === chapter}).length;
-  if(matching > 0) 
-    return true;
-}
-
-var chapterChange = function() {
-  var time = player.getCurrentTime();
-  var current = Chapters.findOne(Session.get('currentChapterId'));
-  var chapterEnd = current.timeStamp;
-  
-  if(time > (chapterEnd + 900)) {
-    Session.set('currentChapterId', 
-      Chapters.findOne({'timeStamp': chapterEnd+900})._id);
-    var subscription = Subscriptions.findOne({userId: Meteor.userId(), 
-      videoId: Session.get('currentVideoId')});
-    var completedChapters = subscription.completedChapters;
-
-    if(completedChapters.indexOf(Session.get('currentChapterId')) === -1) {
-      completedChapters.push(Session.get('currentChapterId'));
-      Subscriptions.update(subscription._id, {$set: {"completedChapters": completedChapters}})
-    }
-  }
-}
-
-// VIDEO MODAL
-Template.videoModal.rendered = function() {
-  $('.modal').on('hidden.bs.modal', function () {
-    player.pauseVideo();
-  });
-}

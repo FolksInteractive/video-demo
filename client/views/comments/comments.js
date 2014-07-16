@@ -5,10 +5,15 @@ Template.comments.helpers({
   },
   'username': function() {
     return Meteor.users.findOne(this.userId).profile.username;
+  },
+  'chapterTitle': function() {
+    if(Session.get('currentChapterId'))
+    return Chapters.findOne(Session.get('currentChapterId')).title;
   }
 });
 
 Template.comments.events({
+  //Enter button listener (13 is the char associated)
   'keypress input': function(e) {
     if(e.which === 13) {
       var text = $('.form-control').val();
@@ -20,7 +25,7 @@ Template.comments.events({
         if(err)
           console.log(err);
         else 
-          $('.form-control').val('');
+          $('.form-control').val('');//Clear the field
       });
     }
   }
