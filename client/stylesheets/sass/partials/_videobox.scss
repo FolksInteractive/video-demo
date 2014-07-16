@@ -1,11 +1,17 @@
 #video-box{
 	.modal-body{
 		padding:0;
+		height: 360px;
 	}
 	.video-player{
 		padding:0;
+		height: 100%;
 	}
 	.discussion{
+		height: 100%;
+		position: absolute;
+		right: 0;
+
 		.header{
 			border-bottom: 1px solid #f3f5f7;
 		}
@@ -15,7 +21,7 @@
 			height: 47px;
 			line-height: 47px;
 			margin:0;
-			font-family: "Helvetica Neue 75 Bold";
+			font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 		}
 		.count{
 			color:#3b4144;
@@ -24,7 +30,7 @@
 			float:right;
 		}
 		.comments-wrapper{
-			max-height: 288px;
+			max-height: 268px;
 			overflow-x:hidden;
 			overflow-y: auto;
 
@@ -82,19 +88,23 @@
 				.name{
 					color:#343535;
 					font-size:14px;
-					font-family: "Helvetica Neue 55 Roman";
+					font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 				}
 				.message{
 					color:#3b4144;
 					font-size:14px;
 					font-weight: 300;
-					font-family: "Helvetica Neue 25 UltraLight";
+					font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 				}
 			}
 
 		}
 		.post-comment{
 			background:#eceff4;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+
 			.poster-image{
 				img{
 					float:right;
@@ -153,4 +163,8 @@
 			width: 1028px;
 		}
 	}
+}
+
+.modal-content {
+	border-radius: 0;
 }

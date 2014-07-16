@@ -33,10 +33,10 @@ Router.map(function () {
     path: '/video/:id',
     template: 'video',
     onBeforeAction: function() {
-      if(!!Videos.findOne(this.params.id))
+      // if(!!Videos.findOne(this.params.id))
         Session.set('currentVideoId', this.params.id);
-      else
-        Router.go('notFound');
+      // else
+      //   Router.go('notFound');
     }
   });
 

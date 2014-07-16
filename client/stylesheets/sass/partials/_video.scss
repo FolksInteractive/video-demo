@@ -3,11 +3,17 @@
   background-size:100% auto; 
   overflow: auto;
   
+  .flaticon-previous11:before {
+    padding-top: 50px;
+    font-size: 40px;
+    position: absolute;
+  }
+
   .header{
     background: transparent;
   }
   .scrolled{
-      display: none;
+    display: none;
   }
   .scrolled-up{
     overflow: hidden;
@@ -15,11 +21,12 @@
       margin-top: 12px;
       .name{
         text-align: center;
+
         h1{
           margin-bottom: 0;
           font-size: 50px;
           text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-          font-family: "Helvetica Neue 25 UltraLight";
+          font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
         }
       }
       .info{
@@ -30,105 +37,105 @@
     }
   }
 
-.info{
-      h2{
-          font-size: 60px;
-          color:#2aff00;
-          font-weight: normal;
-          position: relative;
-          margin: 37px 0 40px 0;
-          text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-          text-align:center;
-          font-family: "Helvetica Neue 25 UltraLight";
+  .info{        
+    h2{
+      font-size: 60px;
+      color:#2aff00;
+      font-weight: normal;
+      position: relative;
+      margin: 37px 0 40px 0;
+      text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+      text-align:center;
+      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+    .para{
+      font-size: 20px;
+      padding-top: 10px;
+      color: #999999;
+    }
+    p.message {
+      font-size: 20px;
+      text-align:center;
+      font-style: italic;
+      text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+    p.name{
+      text-align:right;
+      padding-right: 50px;
+      margin-bottom: 60px;
+      font-size: 16px;
+      font-style: italic;
+      text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+      .job{
+        font-size: 12px;
       }
-      .para{
-        font-size: 20px;
-        padding-top: 10px;
-        color: #999999;
-      }
-      p.message {
-        font-size: 20px;
-        text-align:center;
-        font-style: italic;
-        text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-        font-family: "Helvetica Neue 25 UltraLight";
-      }
-      p.name{
-        text-align:right;
-        padding-right: 50px;
-        margin-bottom: 60px;
-        font-size: 16px;
-        font-style: italic;
-        text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-        font-family: "Helvetica Neue 25 UltraLight";
-        .job{
-          font-size: 12px;
-        }
-      }
+    }
 
 
-      .arrow{
-        color: #2aff00;
-        margin: 0 10px;
-        font-size: 30px;
-        line-height: 28px;
-        height: 28px;
-        overflow: hidden;
-        display: inline-block;
-        position: relative;
-        top: 5px;
-        font-weight: 300;
-     }
+    .arrow{
+      color: #2aff00;
+      margin: 0 10px;
+      font-size: 30px;
+      line-height: 28px;
+      height: 28px;
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      font-weight: 300;
+    }
 
-}
-
-.btn.green.big{
-  background:#2aff00;
-  border:1px solid #2aff00;
-  line-height: 95px;
-  font-size: 30px;
-  color: #001325;
-  border-radius:10px;
-  padding: 0 20px;
-  font-family: "Helvetica Neue 75 Bold";
-  &:hover{
-    background: darken(#2aff00, 5%);
-  }
-}
-.name{
-  h1{
-    color: #fff;
-    font-size: 85px;
-    margin:30px 0 25px 0;
-    text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-    font-family: "Helvetica Neue 25 UltraLight";
-  }
-  p{
-    font-style: italic;
-    font-family: "Helvetica Neue 25 UltraLight";
   }
 
-  &.bottom{
-    text-align:center;
+  .btn.green.big{
+    background:#2aff00;
+    border:1px solid #2aff00;
+    line-height: 95px;
+    font-size: 30px;
+    color: #001325;
+    border-radius:10px;
+    padding: 0 20px;
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    &:hover{
+      background: darken(#2aff00, 5%);
+    }
   }
-}
+  .name{
+    h1{
+      color: #fff;
+      font-size: 85px;
+      margin:30px 0 25px 0;
+      text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+    p{
+      font-style: italic;
+      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+
+    &.bottom{
+      text-align:center;
+    }
+  }
 
 }
 
 @media (max-width: $screen-md-max) {
-   .video{
-    .scrolled-up{
-      height: auto !important;
-    }
-   }
+ .video{
+  .scrolled-up{
+    height: auto !important;
+  }
+}
 }
 @media (min-width: $screen-lg-min) {
   .video{
     .info{
-        h2{
-            text-align:right;
-        }
+      h2{
+        text-align:right;
       }
+    }
     .bottom.name{
       text-align: left;
     }
@@ -149,8 +156,8 @@
   .video{
     .info{
       h2{
-         margin: 70px 0 42px 0;
-      }
-    }
-  }
+       margin: 70px 0 42px 0;
+     }
+   }
+ }
 }

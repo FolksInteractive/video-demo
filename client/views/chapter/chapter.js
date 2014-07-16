@@ -23,6 +23,10 @@ Template.chapter.completed = function() {
     return true;
 }
 
+Template.chapter.commentsAmount = function() {
+  return Comments.find({'chapterId': this._id}).count();
+}
+
 /*
 * This function checks if the current player time is over the chapter 
 * end timeStamp. If so, the currentChapterId session variable is updated.

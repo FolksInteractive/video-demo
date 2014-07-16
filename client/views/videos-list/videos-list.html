@@ -51,7 +51,7 @@
         <div class="row">
           <div class="col-md-16 col-sm-16 person-box">
             {{#each videos}}
-            {{> videoItem}}
+              {{> videoItem}}
             {{/each}}
           </div>
         </div>
@@ -63,10 +63,12 @@
 <template name="videoItem">
   <div class="col-lg-6 col-lg-push-1 col-md-8 col-sm-8 person-profile">
     <div class="row">
-      <div class="person">
-        <h2>Andre Bisson</h2>
-        <h4>{{title}}</h4>
-      </div>
+      <a href="#">
+        <div class="person">
+          <h2>Andre Bisson</h2>
+          <h4>{{title}}</h4>
+        </div>
+      </a>
     </div>
     <div class="row">
       <div class="col-md-16 col-sm-16 social-icons">
@@ -84,7 +86,7 @@
           <li>
             <div class="comments">
               <span>Commentaires</span><br/>
-              <img src="/img/comments.png" alt="" />  <strong>12</strong>
+              <img src="/img/comments.png" alt="" />  <strong>{{commentsAmount}}</strong>
             </div>
           </li>
           <li>
