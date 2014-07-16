@@ -56,9 +56,15 @@
 
     <div class="col-md-12 col-md-push-2">
       <div class=" col-md-4 col-sm-4 vedio">
-        <a href="#" class="thumb" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
-          <img src="/img/video.jpg" alt="" />
-        </a>
+        {{#if completed}}
+          <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
+            <img src="/img/video.jpg" alt="" />
+          </a>
+        {{else}}
+          <a href="#" class="thumb" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
+            <img src="/img/video.jpg" alt="" />
+          </a>
+        {{/if}}
       </div>
       <div class=" col-md-12 col-sm-12 vedio">
         <h2 class="title">{{title}}</h2>

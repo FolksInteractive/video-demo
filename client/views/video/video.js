@@ -44,14 +44,14 @@ Template.chapter.events({
   }
 });
 
-Template.chapter.rendered = function() {
-  var currentId = this.data._id;
+Template.chapter.completed = function() {
+  var currentId = this._id;
   var completedChapters = Subscriptions.findOne({userId: Meteor.userId(), 
     videoId: Session.get('currentVideoId')}).completedChapters;
   var matching = completedChapters.filter(function(chapter) {
     return currentId === chapter}).length;
   if(matching > 0) 
-    $('a[data-id='+ currentId+']').addClass('checked');
+    return true;
 }
 
 var chapterChange = function() {
@@ -71,7 +71,6 @@ var chapterChange = function() {
       Subscriptions.update(subscription._id, {$set: {"completedChapters": completedChapters}})
     }
   }
-  console.log(Session.get('currentChapterId'));
 }
 
 // VIDEO MODAL
