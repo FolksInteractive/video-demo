@@ -4,7 +4,7 @@ if (Meteor.users.find().count() === 0) {
     password: 'admin1',
     profile: {
       username: 'admin',
-      watchedChapters: []
+      subscriptions: []
     }
   });
   Meteor.logout();

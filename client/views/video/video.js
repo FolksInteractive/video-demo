@@ -59,8 +59,7 @@ var chapterChange = function() {
     completed.push(Chapters.findOne({'timeStamp': chapterEnd+900})._id);
     Meteor.users.update({_id: Meteor.user()._id}, {$set: {"profile.watchedChapters": completed}});
   }
-
-
+  console.log(Session.get('currentChapterId'));
 }
 
 // VIDEO MODAL
