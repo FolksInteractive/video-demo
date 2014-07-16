@@ -3,8 +3,7 @@ if (Meteor.users.find().count() === 0) {
     email : 'renaud@timecrumbs.com',
     password: 'admin1',
     profile: {
-      username: 'admin',
-      subscriptions: []
+      username: 'admin'
     }
   });
   Meteor.logout();

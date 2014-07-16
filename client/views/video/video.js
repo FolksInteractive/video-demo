@@ -26,9 +26,15 @@ Template.video.helpers({
 var playerState;
 Template.chapter.events({
   'click a': function() {
-    var completed = Meteor.user().profile.watchedChapters;
-    completed.push(this._id);
-    Meteor.users.update({_id: Meteor.user()._id}, {$set: {"profile.watchedChapters": completed}});
+    var subscription = Subscriptions.findOne({userId: Meteor.userId(), 
+      videoId: Session.get('currentVideoId')});
+    var completedChapters = subscription.completedChapters;
+
+    if(completedChapters.indexOf(this._id) === -1) {
+      completedChapters.push(this._id);
+      Subscriptions.update(subscription._id, {$set: {"completedChapters": completedChapters}})
+    }
+
     var video = Videos.findOne(Session.get('currentVideoId'));
     player.cueVideoById(video.youtubeId, this.timeStamp);
     player.playVideo();
@@ -40,8 +46,9 @@ Template.chapter.events({
 
 Template.chapter.rendered = function() {
   var currentId = this.data._id;
-  var userChapters = Meteor.user().profile.watchedChapters;
-  var matching = userChapters.filter(function(chapter) {
+  var completedChapters = Subscriptions.findOne({userId: Meteor.userId(), 
+    videoId: Session.get('currentVideoId')}).completedChapters;
+  var matching = completedChapters.filter(function(chapter) {
     return currentId === chapter}).length;
   if(matching > 0) 
     $('a[data-id='+ currentId+']').addClass('checked');
@@ -55,9 +62,14 @@ var chapterChange = function() {
   if(time > (chapterEnd + 900)) {
     Session.set('currentChapterId', 
       Chapters.findOne({'timeStamp': chapterEnd+900})._id);
-    var completed = Meteor.user().profile.watchedChapters;
-    completed.push(Chapters.findOne({'timeStamp': chapterEnd+900})._id);
-    Meteor.users.update({_id: Meteor.user()._id}, {$set: {"profile.watchedChapters": completed}});
+    var subscription = Subscriptions.findOne({userId: Meteor.userId(), 
+      videoId: Session.get('currentVideoId')});
+    var completedChapters = subscription.completedChapters;
+
+    if(completedChapters.indexOf(Session.get('currentChapterId')) === -1) {
+      completedChapters.push(Session.get('currentChapterId'));
+      Subscriptions.update(subscription._id, {$set: {"completedChapters": completedChapters}})
+    }
   }
   console.log(Session.get('currentChapterId'));
 }
