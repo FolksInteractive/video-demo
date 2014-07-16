@@ -38,7 +38,13 @@ Deps.autorun(function (c) {
   document.getElementById('player-parent').appendChild(playerDiv);
 
   player = null;
-  player = new YT.Player('player');
+  player = new YT.Player('player', {
+    events: {
+      'onStateChange': function(state) {
+        Session.set('playerState', state.data);
+      }
+    }
+  });
 
   Meteor.clearInterval(interval);
 }, 100);
