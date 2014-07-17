@@ -1,6 +1,5 @@
 <template name="video">
   <div class="video">
-    <a href="{{pathFor 'videosList'}}"><span class='flaticon-previous11 previous'></span></a>
     {{#with video}}
       <div class="clear-fix"></div>
       <div class="container do-scroll-up">
@@ -16,6 +15,7 @@
 
         <div class="scrolled-hide">
           <div class="row">
+            <a href="{{pathFor 'videosList'}}"><span class='flaticon-previous11 previous'></span></a>
             <div class="  col-lg-10 col-lg-push-6 info">
               <h2>{{title}}</h2>
               <p class="message"><span class="arrow left">&laquo;</span>Un must pour tous les entrepreneurs d’aujourd’hui et de demain<span class="arrow right">&raquo;</span>

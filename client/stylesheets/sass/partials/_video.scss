@@ -1,12 +1,18 @@
 .video{
   background: url(/img/tech_bg.png);
-  background-size:100% auto; 
+  background-size: cover; 
   overflow: auto;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   
   .flaticon-previous11:before {
-    padding-top: 50px;
+    margin-top: 135px;
+    left: 65px;
     font-size: 40px;
     position: absolute;
+    color: #ffffff;
   }
 
   .header{
@@ -156,7 +162,7 @@
   .video{
     .info{
       h2{
-       margin: 70px 0 42px 0;
+       margin: 135px 0 42px 0;
      }
    }
  }

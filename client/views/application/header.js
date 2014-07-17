@@ -1,5 +1,7 @@
 Template.header.events({
   'click a.logout': function() {
-    Meteor.logout();
+    Meteor.logout(function() {
+      Router.go('home');
+    });
   }
 });
