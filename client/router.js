@@ -32,6 +32,9 @@ Router.map(function () {
   this.route('video', {
     path: '/video/:id',
     template: 'video',
+    waitFor: function() {
+      return Meteor.subscribe('chapters');
+    },
     onBeforeAction: function() {
       // if(!!Videos.findOne(this.params.id))
         Session.set('currentVideoId', this.params.id);

@@ -19,8 +19,10 @@ Template.comments.events({
       body: text,
       userId: Meteor.userId(),
       chapterId: Session.get('currentChapterId')
+    }, function() {
+      scrollToLastComment();
     });
-    $(e.target).find('input[name=body]').val(''); // clear field
+    $(e.target).find('input[name=body]').val(''); // clear fiel
     return false;
   }
 });

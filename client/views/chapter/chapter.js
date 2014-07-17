@@ -8,7 +8,7 @@ Template.chapter.events({
     Session.set('currentChapterId',this._id);
     updateSubscription();
 
-    Meteor.setInterval(chapterChange,10000);//Call every 100sec
+    Meteor.setInterval(chapterChange,100);//Call every 2sec
   }
 });
 

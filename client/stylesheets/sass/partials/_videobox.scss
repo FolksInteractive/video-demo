@@ -7,6 +7,38 @@
 		padding:0;
 		height: 100%;
 	}
+	.navigation {
+		font-size: 20px;
+		text-align: center;
+		position: absolute;
+		top: -100px;
+		width: 100%;
+
+		h1 {
+			color: #ffffff;
+
+			.text {
+				font-size: 35px;
+			}
+
+			.previous-chapter, .next-chapter {
+				position: absolute;
+				cursor: pointer;
+			}
+
+			.previous-chapter {
+				left: 0;
+			}
+
+			.next-chapter {
+				right: 0;
+				-moz-transform: scaleX(-1); /* Gecko */
+        -o-transform: scaleX(-1); /* Operah */
+        -webkit-transform: scaleX(-1); /* webkit */
+        transform: scaleX(-1); /* standard */
+			}
+		}
+	}
 	.discussion{
 		height: 100%;
 		position: absolute;
@@ -22,7 +54,15 @@
 			line-height: 47px;
 			margin:0;
 			font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+
+			&:first-child {
+				margin-bottom: -25px;
+			}
+			&:last-child {
+				margin-bottom: -10px;
+			}
 		}
+
 		.count{
 			color:#3b4144;
 			opacity:0.5;
