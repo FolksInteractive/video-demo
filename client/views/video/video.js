@@ -20,3 +20,13 @@ Template.video.events({
     $('.videos-list').removeClass('visible-xs');
   }
 });
+
+Template.video.rendered = function() {
+  $('.video').scroll(function(e) {
+    var position = $(this).scrollTop();
+    if(position > 10)
+      $('.head').slideUp(500);
+    else 
+      $('.head').slideDown(500);
+  });
+}

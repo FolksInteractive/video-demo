@@ -8,25 +8,19 @@ Template.comments.helpers({
   },
   'chapterTitle': function() {
     if(Session.get('currentChapterId'))
-    return Chapters.findOne(Session.get('currentChapterId')).title;
+      return Chapters.findOne(Session.get('currentChapterId')).title;
   }
 });
 
 Template.comments.events({
-  //Enter button listener (13 is the char associated)
-  'keypress input': function(e) {
-    if(e.which === 13) {
-      var text = $('.form-control').val();
-      var comment = Comments.insert({
-        body: text,
-        userId: Meteor.userId(),
-        chapterId: Session.get('currentChapterId')
-      }, function(err) {
-        if(err)
-          console.log(err);
-        else 
-          $('.form-control').val('');//Clear the field
-      });
-    }
+  'submit .comment-form': function(e) {
+    var text = $(e.target).find('input[name=body]').val();
+    var comment = Comments.insert({
+      body: text,
+      userId: Meteor.userId(),
+      chapterId: Session.get('currentChapterId')
+    });
+    $(e.target).find('input[name=body]').val(''); // clear field
+    return false;
   }
 });

@@ -24,4 +24,18 @@
       font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     }
   }
+
+  .accounts-error {
+    border: 1px solid yellow;
+    color: yellow;
+    background: rgba(0, 0, 0, 0.2);
+    width: 335px;
+    height: 45px;
+    line-height: 45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 1px #000000;
+    border-radius: 4px;
+  }
 }

@@ -1,17 +1,23 @@
 <template name="home">
-<div class="home">
- <div class="container text-center">
-  <div class="wrapper">
-    <h1 class="title">Bienvenue dans le hub des savoirs</h1>
-    <p class="sub-header">Un produit expérimental propulsé par l’ÉTS MTL visant le partage et</p>
-    <p class="sub-header">l’enrichissement des connaissances sous toutes ses formes.</p>
-    
-    <div class="login-form">
-      <input type="text" id="email" class="form-control" placeholder="Votre courriel" />
-      <input type="password" id="password" class="form-control" placeholder="Votre mot de passe" />
-      <input type="submit" class="submit" />
+  <div class="home">
+   <div class="container text-center">
+    <div class="wrapper">
+      <h1 class="title">Bienvenue dans le hub des savoirs</h1>
+      <p class="sub-header">Un produit expérimental propulsé par l’ÉTS MTL visant le partage et</p>
+      <p class="sub-header">l’enrichissement des connaissances sous toutes ses formes.</p>
+
+      <div class="accounts-error">
+        <div class='alert alert-danger'>Error</div>
+      </div>
+
+      <div class="login-form">
+        <form class="login-form">
+          <input type="text" id="email" class="form-control" placeholder="Votre courriel" />
+          <input type="password" id="password" class="form-control" placeholder="Votre mot de passe" />
+          <input type="submit" class="submit" />
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </template>
