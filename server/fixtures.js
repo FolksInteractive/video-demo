@@ -12,7 +12,7 @@ if (Meteor.users.find().count() === 0) {
 if (Videos.find().count() === 0) {
   Videos.insert({
     title: 'Techniques de sollicitation',
-    youtubeId: 'HKCH8HsdcOA',
+    youtubeUrl: 'https://www.youtube.com/watch?v=HKCH8HsdcOA&feature=youtu.be',
     chapters:
       [Chapters.insert({title: "Importance d'une communication efficace", 
         timeStamp: 0}),

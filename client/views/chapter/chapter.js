@@ -1,14 +1,11 @@
 Template.chapter.events({
   //Play clicked chapter
-  'click a': function() {
-    var video = Videos.findOne(Session.get('currentVideoId'));
-    player.cueVideoById(video.youtubeId, this.timeStamp);
-    player.playVideo();
-
+  'click a': function() {  
+    player.play();
+    player.currentTime(this.timeStamp);//Set time to chapter timeStamp
     Session.set('currentChapterId',this._id);
     updateSubscription();
-
-    Meteor.setInterval(chapterChange,100);//Call every 2sec
+    handleChapterChange();
   }
 });
 
@@ -31,20 +28,27 @@ Template.chapter.commentsAmount = function() {
 * This function checks if the current player time is over the chapter 
 * end timeStamp. If so, the currentChapterId session variable is updated.
 */
-var chapterChange = function() {
-  var time = player.getCurrentTime(); //Player time
-  var current = Chapters.findOne(Session.get('currentChapterId')); //Current chapter
-  var chapterStart = current.timeStamp;
-  var chapterEnd = chapterStart + 900;//End of current chapter
-  
-  //If currentTime exceeded chapterEnd or before start
-  if(time > (chapterEnd) || time < (chapterStart)) {
-    var timeRange = Math.floor(time/900) * 900; //New chapter's timerange
-    Session.set('currentChapterId', 
-      Chapters.findOne({'timeStamp': timeRange})._id);
+var handleChapterChange = function() {
+  var timeStamps = getChaptersTimeStamps();
+  console.log(timeStamps);
 
-    updateSubscription();
+  player.on( "timeupdate", function(e) {
+    if(!player.paused()) {
+      var current = _.find(timeStamps, function(timeStamp) {
+        var index = _.indexOf(timeStamps, timeStamp);
+        var time = player.currentTime();
+        // console.log(time, timeStamp, timeStamps[index + 1])
+        if(time >= timeStamp && time < timeStamps[index + 1])
+          return true;
+      });
+      if(Chapters.findOne(Session.get('currentChapterId')).timeStamp !== 
+        current) {
+        Session.set('currentChapterId', 
+          Chapters.findOne({'timeStamp': current})._id);
+        updateSubscription();
+    }
   }
+});
 }
 
 var updateSubscription = function() {

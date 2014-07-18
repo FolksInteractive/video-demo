@@ -1,11 +1,16 @@
 Template.videoModal.rendered = function() {
+  var video = Videos.findOne(Session.get('currentVideoId'));
+  player = Popcorn.youtube('.player', video.youtubeUrl);
+
   $('.modal').on('shown.bs.modal', function() {
     scrollToLastComment();
   });
 
   $('.modal').on('hidden.bs.modal', function () {
-    player.pauseVideo();
+    player.pause();
   });
+
+  handleNavigation(lastChapter, nextChapter);
 }
 
 Template.videoModal.notfFirst = function() {
@@ -14,10 +19,7 @@ Template.videoModal.notfFirst = function() {
 
 Template.videoModal.lastChapter = function() {
   //Map index for chapters
-  var chapters = Chapters.find().map(function(doc, index, cursor) {
-    var i = _.extend(doc, {index: index});
-    return i;
-  });
+  var chapters = getChaptersWithIndex();
   
   if (!Session.get('currentChapterId')) {
     Session.set('currentChapterId', chapters[0]._id);
@@ -26,13 +28,12 @@ Template.videoModal.lastChapter = function() {
   var current = _.find(chapters, function(chapter) {
     return chapter._id === Session.get('currentChapterId');
   });
-  var lastChapter = chapters[current.index - 1];
-  var nextChapter = chapters[current.index + 1];
-
-  handleNavigation(lastChapter, nextChapter);
+  lastChapter = chapters[current.index - 1];
+  nextChapter = chapters[current.index + 1];
 
   if(current.index !== 0)
     return lastChapter.title;
+  return "";
 }
 
 scrollToLastComment = function() {
@@ -44,12 +45,18 @@ scrollToLastComment = function() {
 var handleNavigation = function(previous, next) {
   previousChapter = previous;
   nextChapter = next;
-  $('.previous-chapter').click(previous,function() {
-    player.seekTo(previousChapter.timeStamp, true);
+
+  $('.previous-chapter').on('click', function() {
+    if(!!previousChapter)
+      player.currentTime(previousChapter.timeStamp);
+    else 
+      player.currentTime(0);//if first chapter
+    player.play();
     return false;
   });
-  $('.next-chapter').click(next, function() {
-    player.seekTo(nextChapter.timeStamp, true);
+  $('.next-chapter').on('click', function() {
+    player.currentTime(nextChapter.timeStamp);
+    player.play();
     return false;
   });
 }

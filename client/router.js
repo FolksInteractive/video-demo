@@ -36,10 +36,7 @@ Router.map(function () {
       return Meteor.subscribe('chapters');
     },
     onBeforeAction: function() {
-      // if(!!Videos.findOne(this.params.id))
-        Session.set('currentVideoId', this.params.id);
-      // else
-      //   Router.go('notFound');
+      Session.set('currentVideoId', this.params.id);
     }
   });
 

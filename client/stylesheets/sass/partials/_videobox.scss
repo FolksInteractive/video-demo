@@ -3,9 +3,10 @@
 		padding:0;
 		height: 360px;
 	}
-	.video-player{
-		padding:0;
+	.player{
+		padding: 0;
 		height: 100%;
+		width: 62.5%;
 	}
 	.navigation {
 		font-size: 20px;
@@ -33,9 +34,9 @@
 			.next-chapter {
 				right: 0;
 				-moz-transform: scaleX(-1); /* Gecko */
-        -o-transform: scaleX(-1); /* Operah */
-        -webkit-transform: scaleX(-1); /* webkit */
-        transform: scaleX(-1); /* standard */
+				-o-transform: scaleX(-1); /* Operah */
+				-webkit-transform: scaleX(-1); /* webkit */
+				transform: scaleX(-1); /* standard */
 			}
 		}
 	}
@@ -43,7 +44,7 @@
 		height: 100%;
 		position: absolute;
 		right: 0;
-
+		top: 0;
 		.header{
 			border-bottom: 1px solid #f3f5f7;
 		}
@@ -77,17 +78,17 @@
 		}
 		.comments-wrapper::-webkit-scrollbar
 		{
-		  width: 5px;  
+			width: 5px;  
 		}
 
 		.comments-wrapper::-webkit-scrollbar-track
 		{
-		  background: rgba(0, 0, 0, 0.1);
+			background: rgba(0, 0, 0, 0.1);
 		}
 
 		.comments-wrapper::-webkit-scrollbar-thumb
 		{
-		  background: rgba(0, 0, 0, 0.3);
+			background: rgba(0, 0, 0, 0.3);
 		}
 		.comment{
 			border-bottom: 1px solid #f3f5f7;
@@ -98,15 +99,15 @@
 				height: 37px;
 				margin: 0 auto;
 				&:after{
-						content: ' ';
-						position: absolute;
-						width: 10px;
-						height: 10px;
-						border-radius: 10px;
-						border: 2px solid #fff;
-						right: 1px;
-						bottom: 0px;
-					}
+					content: ' ';
+					position: absolute;
+					width: 10px;
+					height: 10px;
+					border-radius: 10px;
+					border: 2px solid #fff;
+					right: 1px;
+					bottom: 0px;
+				}
 				&.online:after{
 					background: #00ad89;
 				}
