@@ -23,6 +23,13 @@
 	
 	.dropdown-toggle{
 		display: inline-block;
+
+		.icon {
+			height: 30px;
+			width: 30px;
+			padding: 0;
+			margin-left: 20px;
+		}
 	}
 	img{
 		&:hover{
