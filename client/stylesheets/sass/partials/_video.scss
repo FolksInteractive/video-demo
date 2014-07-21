@@ -10,9 +10,15 @@
   .previous:before {
     margin-top: 135px;
     left: 65px;
-    font-size: 40px;
     position: absolute;
     color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    height: 80px;
+    width: 80px;
   }
 
   .header{
@@ -79,7 +85,6 @@
       }
     }
 
-
     .arrow{
       color: #2aff00;
       margin: 0 10px;
@@ -92,7 +97,6 @@
       top: 5px;
       font-weight: 300;
     }
-
   }
 
   .btn.green.big{
@@ -108,6 +112,7 @@
       background: darken(#2aff00, 5%);
     }
   }
+
   .name{
     h1{
       color: #fff;
@@ -153,8 +158,6 @@
         }
       }
     }
-
-
   }
 }
 
