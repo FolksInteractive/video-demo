@@ -30,25 +30,25 @@ Template.chapter.commentsAmount = function() {
 */
 var handleChapterChange = function() {
   var timeStamps = getChaptersTimeStamps();
-  console.log(timeStamps);
 
   player.on( "timeupdate", function(e) {
     if(!player.paused()) {
       var current = _.find(timeStamps, function(timeStamp) {
         var index = _.indexOf(timeStamps, timeStamp);
         var time = player.currentTime();
-        // console.log(time, timeStamp, timeStamps[index + 1])
+
         if(time >= timeStamp && time < timeStamps[index + 1])
           return true;
       });
+      
       if(Chapters.findOne(Session.get('currentChapterId')).timeStamp !== 
         current) {
         Session.set('currentChapterId', 
           Chapters.findOne({'timeStamp': current})._id);
         updateSubscription();
-    }
-  }
-});
+      }
+    } 
+  });
 }
 
 var updateSubscription = function() {

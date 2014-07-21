@@ -10,30 +10,12 @@ Template.videoModal.rendered = function() {
     player.pause();
   });
 
-  handleNavigation(lastChapter, nextChapter);
+  handleNavigation(lastChapter(), nextChapter());
 }
 
-Template.videoModal.notfFirst = function() {
-  return !(Chapters.findOne()._id === Session.get('currentChapterId'));
-}
-
-Template.videoModal.lastChapter = function() {
-  //Map index for chapters
-  var chapters = getChaptersWithIndex();
-  
-  if (!Session.get('currentChapterId')) {
-    Session.set('currentChapterId', chapters[0]._id);
-  };
-
-  var current = _.find(chapters, function(chapter) {
-    return chapter._id === Session.get('currentChapterId');
-  });
-  lastChapter = chapters[current.index - 1];
-  nextChapter = chapters[current.index + 1];
-
-  if(current.index !== 0)
-    return lastChapter.title;
-  return "";
+Template.videoModal.chapterTitle = function() {
+  if(!!Session.get('currentChapterId'))
+    return Chapters.findOne(Session.get('currentChapterId')).title;
 }
 
 scrollToLastComment = function() {
@@ -59,4 +41,29 @@ var handleNavigation = function(previous, next) {
     player.play();
     return false;
   });
+}
+
+var lastChapter = function() {
+  //Map index for chapters
+  var chapters = getChaptersWithIndex();
+  
+  if (!Session.get('currentChapterId')) {
+    Session.set('currentChapterId', chapters[0]._id);
+  };
+
+  var current = _.find(chapters, function(chapter) {
+    return chapter._id === Session.get('currentChapterId');
+  });
+
+  return chapters[current.index - 1];
+}
+
+var nextChapter = function() {
+  var chapters = getChaptersWithIndex();
+
+  var current = _.find(chapters, function(chapter) {
+    return chapter._id === Session.get('currentChapterId');
+  });
+
+  return chapters[current.index + 1];
 }
