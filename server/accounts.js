@@ -1,0 +1,200 @@
+Users = [
+  {
+    "lastName":"Akouemo Nguena",
+    "name":"Jeanne Darisca",
+    "email":"jeanne-darisca.akouemo-nguena.1@ens.etsmtl.ca",
+    "password":"1nsq06I6WJnG66I"
+  },
+  {
+    "lastName":"Andriamaro",
+    "name":"Alain",
+    "email":"alain.andriamaro.1@ens.etsmtl.ca",
+    "password":"04xlv56M6Mo72UF"
+  },
+  {
+    "lastName":"Anzara",
+    "name":"Kouadjané Jean",
+    "email":"kouadjane-jean.anzara.1@ens.etsmtl.ca",
+    "password":"dcIOUI1uRipPlIw"
+  },
+  {
+    "lastName":"Aubert",
+    "name":"Samuel",
+    "email":"samuel.aubert.1@ens.etsmtl.ca",
+    "password":"qtiq4uXLADHJsac"
+  },
+  {
+    "lastName":"Baskarane",
+    "name":"Jennifer",
+    "email":"jennifer.baskarane.1@ens.etsmtl.ca",
+    "password":"jW86C0guJyQ25DM"
+  },
+  {
+    "lastName":"Bensaid",
+    "name":"Noureddine",
+    "email":"noureddine.bensaid.1@ens.etsmtl.ca",
+    "password":"XnqYp4BwSBjNlmi"
+  },
+  {
+    "lastName":"Bouchakour",
+    "name":"Madjda",
+    "email":"madjda.bouchakour.1@ens.etsmtl.ca",
+    "password":"b5E3XoDuNrVfiIP"
+  },
+  {
+    "lastName":"Brito Tineo",
+    "name":"Yelitza Elena",
+    "email":"yelitza-elena.brito-tineo.1@ens.etsmtl.ca",
+    "password":"t096BTPIp953PXA"
+  },
+  {
+    "lastName":"Diab",
+    "name":"Aiman",
+    "email":"aiman.diab.1@ens.etsmtl.ca",
+    "password":"kU0oir8WgC3J97v"
+  },
+  {
+    "lastName":"Diandimba Nzila",
+    "name":"Alex",
+    "email":"alex.diandimba-nzila.1@ens.etsmtl.ca",
+    "password":"hnj75vr8NYHOi4m"
+  },
+  {
+    "lastName":"Fontaine",
+    "name":"Jean-Baptiste",
+    "email":"jean-baptiste.fontaine.1@ens.etsmtl.ca",
+    "password":"OLsV5TVuqVAr5pV"
+  },
+  {
+    "lastName":"Junqueira Vieira",
+    "name":"Alexandre",
+    "email":"alexandre.junqueira-vieira.1@ens.etsmtl.ca",
+    "password":"eKSgj6mytVfBNZQ"
+  },
+  {
+    "lastName":"Morency",
+    "name":"Marcklyvens C",
+    "email":"marcklyvens-c.morency.1@ens.etsmtl.ca",
+    "password":"000fJ3M2dnSVE2Z"
+  },
+  {
+    "lastName":"Uwambajimana",
+    "name":"Marie-Claire",
+    "email":"marie-claire.uwambajimana.1@ens.etsmtl.ca",
+    "password":"dz27RaTQPxs0EGX"
+  },
+  {
+    "lastName":"Zamatchi",
+    "name":"Zirignon Roger",
+    "email":"zirignon-roger.zamatchi.1@ens.etsmtl.ca",
+    "password":"qXAW6O8XMU09T3k"
+  },
+  {
+    "lastName":"Zendafou",
+    "name":"Ahmed",
+    "email":"ahmed.zendafou.1@ens.etsmtl.ca",
+    "password":"q9Ww1ZTG5h78ozU"
+  },
+  {
+    "lastName":"Zuluaga Grajales",
+    "name":"Paulo Alejandro",
+    "email":"paulo-alejandro.zuluaga-grajales.1@ens.etsmtl.ca",
+    "password":"79HPNGe75G03I2Q"
+  },
+  {
+    "lastName":"Abdillahi Ali Abdillahi",
+    "name":"Abdillahi Ali Abdilla",
+    "email":"abdillahi-ali-abdilla.abdillahi-ali-abdillahi.1@ens.etsmtl.ca",
+    "password":"jFp6r9kVriHyfrq"
+  },
+  {
+    "lastName":"Aoun",
+    "name":"Maher",
+    "email":"maher.aoun.1@ens.etsmtl.ca",
+    "password":"QHnmj7N4ywUCfAY"
+  },
+  {
+    "lastName":"Camara",
+    "name":"Djémé",
+    "email":"djeme.camara.1@ens.etsmtl.ca",
+    "password":"51IrprV942Z1QKm"
+  },
+  {
+    "lastName":"Gonzalez Garcia",
+    "name":"Eugenio",
+    "email":"eugenio.gonzalez-garcia.1@ens.etsmtl.ca",
+    "password":"y1Q0i4woXRoqqWJ"
+  },
+  {
+    "lastName":"Hakem",
+    "name":"Saliha",
+    "email":"saliha.hakem.1@ens.etsmtl.ca",
+    "password":"Z714t2q5YrFr2LO"
+  },
+  {
+    "lastName":"Jarmak",
+    "name":"Samer",
+    "email":"samer.jarmak.1@ens.etsmtl.ca",
+    "password":"0naSD567L527Vhb"
+  },
+  {
+    "lastName":"Marin Gil",
+    "name":"Yeison Alejandro",
+    "email":"yeison-alejandro.marin-gil.1@ens.etsmtl.ca",
+    "password":"zBnQ6ZIZUiYXxSO"
+  },
+  {
+    "lastName":"Nader",
+    "name":"Anthonio",
+    "email":"anthonio.nader.1@ens.etsmtl.ca",
+    "password":"475002T72z88Rfd"
+  },
+  {
+    "lastName":"Pironi",
+    "name":"Gauthier",
+    "email":"gauthier.pironi.1@ens.etsmtl.ca",
+    "password":"5d8N711yER7477I"
+  },
+  {
+    "lastName":"Romero",
+    "name":"Freud Abner",
+    "email":"freud-abner.romero.1@ens.etsmtl.ca",
+    "password":"w71i800DU1W59KX"
+  },
+  {
+    "lastName":"Tanoh",
+    "name":"Niamien Bla Marie Janvier",
+    "email":"niamien-bla-marie-janvier.tanoh.1@ens.etsmtl.ca",
+    "password":"jG11OA77NM5kkho"
+  },
+  {
+    "lastName":"Bisson",
+    "name":"André",
+    "email":"andre.bisson@etsmtl.ca",
+    "password":"xW2zDxerQyfsEPL"
+  },
+  {
+    "lastName":"Lalonde",
+    "name":"Normand",
+    "email":"normand.lalonde@etsmtl.ca",
+    "password":"JH9rO101Wd85LMO"
+  },
+  {
+    "lastName":"Goulet",
+    "name":"Alexandre",
+    "email":"alexandre.goulet@etsmtl.ca",
+    "password":"9XQfHb49497020N"
+  },
+  {
+    "lastName":"Wade",
+    "name":"Moussa",
+    "email":"moussa.wade@etsmtl.ca",
+    "password":"xE69K681DI4007t"
+  },
+  {
+    "lastName":"Rivet",
+    "name":"Pierre",
+    "email":"pierre.rivet@etsmtl.ca",
+    "password":"830F6Y3PCt6LCwO"
+  }
+]
