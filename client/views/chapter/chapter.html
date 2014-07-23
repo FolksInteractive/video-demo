@@ -1,21 +1,24 @@
 <template name="chapter">
   <div class="row video-row">
     <div class="col-md-12 col-md-push-2">
-      <div class=" col-md-4 col-sm-4 vedio">
+      <div class="video-icon">
         {{#if completed}}
           <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
-            <img src="/img/video.jpg" alt="" />
+            <div class="status status-checked"><span class='flaticon flaticon-checkmark5'></span></div>
           </a>
         {{else}}
           <a href="#" class="thumb" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
-            <img src="/img/video.jpg" alt="" />
+            <div class="status status-play"><span class='flaticon flaticon-play36'></span></div>
           </a>
         {{/if}}
       </div>
-      <div class=" col-md-12 col-sm-12 vedio">
-        <h2 class="title">{{title}}</h2>
-        <p class="details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elit sit amet elit placerat sodales quis sed dolor. Quisque non malesuada metus...</p>
-        <span class="comments"><img src="/img/comments.png" alt="" /> {{commentsAmount}} commentaires</span>
+      <div class="video-title">
+        <h3 class="title"><a href="#" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">{{title}}</a></h3>
+        <!--<p class="details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elit sit amet elit placerat sodales quis sed dolor. Quisque non malesuada metus...</p>-->
+        <span class="comments">{{commentsAmount}} Commentaires</span>
+      </div>
+      <div class="video-time">
+        1:20
       </div>
     </div>
   </div> 
