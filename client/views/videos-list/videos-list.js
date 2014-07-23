@@ -1,3 +1,7 @@
+Template.videosList.rendered = function() {
+  $('.head').show(); // Show header if on video page has been scrolled
+};
+
 Template.videosList.helpers({
   videos: function() {
     return Videos.find().fetch();
