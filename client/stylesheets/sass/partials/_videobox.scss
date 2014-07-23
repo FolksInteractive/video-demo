@@ -1,13 +1,41 @@
 #video-box{
+	
+	.modal-content {
+		background: 0;
+	}
+
 	.modal-body{
 		padding:0;
-		height: 360px;
+		height: 480px;
+		width: 720px;
+		margin-left: auto;
+		margin-right: auto;
 	}
+
 	.player{
 		padding: 0;
 		height: 100%;
-		width: 62.5%;
+		width: 100%;
 	}
+
+	.controls {
+		background: RGBA(128, 128, 128, 0.3);
+		height: 30px;
+		width: 100%;
+		position: absolute;
+
+		.progress {
+			height: 5px;
+			margin-top: 12px;
+			background: #000000;
+			border-radius: 0;
+
+			.progress-bar {
+				background: #5CB85C;
+			}
+		}
+	}
+
 	.navigation {
 		font-size: 20px;
 		text-align: center;

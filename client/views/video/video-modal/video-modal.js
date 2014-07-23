@@ -10,6 +10,22 @@ Template.videoModal.rendered = function() {
     player.pause();
   });
 
+  player.on('timeupdate', function() {
+    var value = player.currentTime()/player.duration() * 100;
+    $('.progress-bar').attr('aria-valuenow', value);
+    $('.progress-bar').css('width', value + '%');
+  });
+
+  $('.progress').on('click', function(event) {
+    var offSet = $(this).offset();
+    var width = $(this).width();
+    var xPos = (event.pageX - offSet.left);
+    var time = (xPos / width) * player.duration();
+    console.log(time);
+    player.currentTime(time);
+    player.play();
+  });
+
   handleNavigation(lastChapter(), nextChapter());
 }
 
