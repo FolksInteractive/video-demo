@@ -24,6 +24,18 @@ Template.chapter.commentsAmount = function() {
   return Comments.find({'chapterId': this._id}).count();
 }
 
+Template.chapter.time = function() {
+  var dateHelper = new Date(0, 0, 0)
+  dateHelper.setSeconds(this.timeStamp);
+
+  var minutes = function() {
+    return (dateHelper.getMinutes() > 10) ? dateHelper.getMinutes() : "0" + 
+    dateHelper.getMinutes();
+  }
+
+  return  dateHelper.getHours() + ":" + minutes();
+}
+
 /*
 * This function checks if the current player time is over the chapter 
 * end timeStamp. If so, the currentChapterId session variable is updated.
