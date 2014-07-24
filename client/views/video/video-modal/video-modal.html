@@ -14,13 +14,30 @@
             <div class="row">
 
               <div class="player"></div>
+
               <div class="controls">
                 <div class="progress">
                   <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+
+                  <div class="comments">
+                    {{> comments}}
+                  </div>
                 </div>
               </div>
-              
-              <!-- {{> comments}} -->
+
+              <div class="comments-bar">
+                <div class="row post-comment">
+                  <div class="col-md-1 poster-image">
+                    <img src="/img/con-1.jpg" class="img-responsive" alt="" />
+                  </div>
+                  <div class="col-md-15 input">
+                    <form class="comment-form">
+                      <input class="submit" type="submit" />
+                      <input class="form-control" name="body" type="text" placeholder="Entrer un commentaire..." />
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

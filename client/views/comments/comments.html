@@ -1,37 +1,23 @@
 <template name='comments'>
-  <div class="col-md-6 discussion">
-    <div class="row header">
-      <div class="col-md-16">
-        <h3 class="title">Discussion du chapitre:</h3>
-      </div>
-    </div>
-
+  <div class="discussion">
     <div class="comments-wrapper">
       {{#each comments}}
-      <div class="row comment">
-        <div class="col-md-4">
+      <div class="comment-item" data-id="{{_id}}">
+        <div class="row comment" style="left:{{position}}px;">
+
           <div class="avatar idle">
             <img src="/img/default.png" class="img-responsive img-circle" alt="" />
           </div>
+
+          <div class="comment-text">
+            <p class="name">{{username}}</p>
+            <p class="message">{{body}}</p>
+          </div>
         </div>
-        <div class="col-md-12 comment-text">
-          <p class="name">{{username}}</p>
-          <p class="message">{{body}}</p>
-        </div>
+        <div class="icon" style="left:{{position}}px;"></div>
       </div>
       {{/each}}
     </div>
 
-    <div class="row post-comment">
-      <div class="col-md-4 poster-image">
-        <img src="/img/con-1.jpg" class="img-responsive" alt="" />
-      </div>
-      <div class="col-md-12 input">
-        <form class="comment-form">
-          <input class="submit" type="submit" />
-          <input class="form-control" name="body" type="text" placeholder="Entrer un commentaire..." />
-        </form>
-      </div>
-    </div>
   </div>
 </template>

@@ -2,29 +2,38 @@ Template.videoModal.rendered = function() {
   var video = Videos.findOne(Session.get('currentVideoId'));
   player = Popcorn.youtube('.player', video.youtubeUrl);
 
-  $('.modal').on('shown.bs.modal', function() {
-    scrollToLastComment();
+  player.on('play', function() {
+    Session.set('duration', player.duration());
   });
+
 
   $('.modal').on('hidden.bs.modal', function () {
     player.pause();
   });
 
   createVideoProgressBar();
-
 }
+
+Template.videoModal.events({
+  'submit .comment-form': function(e) {
+    var text = $(e.target).find('input[name=body]').val();
+    var comment = Comments.insert({
+      body: text,
+      userId: Meteor.userId(),
+      chapterId: Session.get('currentChapterId'),
+      time: Math.floor(player.currentTime())
+    });
+
+    $(e.target).find('input[name=body]').val(''); // clear fiel
+    return false;
+  }
+}); 
 
 Template.videoModal.chapterTitle = function() {
   if(!!Session.get('currentChapterId')) {
     handleNavigation(); // Call the handle in a reactive manner when chapter changes
     return Chapters.findOne(Session.get('currentChapterId')).title;
   }
-}
-
-scrollToLastComment = function() {
-  var scrollContent = $('.comments-wrapper');
-  var height = scrollContent[0].scrollHeight;
-  scrollContent.scrollTop(height);
 }
 
 var handleNavigation = function() {
@@ -73,9 +82,19 @@ var nextChapter = function() {
 
 var createVideoProgressBar = function() {
   player.on('timeupdate', function() {
-    var value = player.currentTime()/player.duration() * 100;
+    var currentTime = Math.floor(player.currentTime());
+    //Green progress
+    var value = currentTime/player.duration() * 100;
     $('.progress-bar').attr('aria-valuenow', value);
     $('.progress-bar').css('width', value + '%');
+
+    if( !!Comments.findOne({time: currentTime}) ) {
+      var currentTime = player.currentTime();
+      var comment = Comments.findOne({time: currentTime});
+      console.log(comment);
+      $('.comment-item[data-id=' + comment._id + ']').show();
+    }
+
   });
 
   hangleProgressBarNavigation();
@@ -87,7 +106,6 @@ var hangleProgressBarNavigation = function() {
     var width = $(this).width();
     var xPos = (event.pageX - offSet.left);
     var time = (xPos / width) * player.duration();
-    console.log(time);
     player.currentTime(time);
     player.play();
   });

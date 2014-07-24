@@ -1,7 +1,14 @@
 Template.comments.helpers({
   'comments': function() {
-    var chapter = Session.get('currentChapterId');
-    return Comments.find({chapterId: chapter}).fetch();
+    var comments = Comments.find().fetch();
+    return comments;
+  },
+  'position': function() {
+    var duration = Session.get('duration');
+    if(!duration)
+      return;
+
+    return this.time / duration * $('body').width() - 5;
   },
   'username': function() {
     return Meteor.users.findOne(this.userId).profile.username;
@@ -9,20 +16,5 @@ Template.comments.helpers({
   'chapterTitle': function() {
     if(Session.get('currentChapterId'))
       return Chapters.findOne(Session.get('currentChapterId')).title;
-  }
-});
-
-Template.comments.events({
-  'submit .comment-form': function(e) {
-    var text = $(e.target).find('input[name=body]').val();
-    var comment = Comments.insert({
-      body: text,
-      userId: Meteor.userId(),
-      chapterId: Session.get('currentChapterId')
-    }, function() {
-      scrollToLastComment();
-    });
-    $(e.target).find('input[name=body]').val(''); // clear fiel
-    return false;
   }
 });
