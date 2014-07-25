@@ -16,6 +16,8 @@ Template.videoModal.rendered = function() {
 
 Template.videoModal.events({
   'submit .comment-form': function(e) {
+    e.preventDefault();
+
     var text = $(e.target).find('input[name=body]').val();
     var comment = Comments.insert({
       body: text,
@@ -24,10 +26,10 @@ Template.videoModal.events({
       time: Math.floor(player.currentTime())
     });
 
-    $(e.target).find('input[name=body]').val(''); // clear fiel
+    $('.comment-form')[0].reset();
     return false;
   }
-}); 
+});
 
 Template.videoModal.chapterTitle = function() {
   if(!!Session.get('currentChapterId')) {
@@ -39,11 +41,11 @@ Template.videoModal.chapterTitle = function() {
 var handleNavigation = function() {
   previous = previousChapter();
   next = nextChapter();
-  
+
   $('.previous-chapter').on('click', function() {
     if(!!previous)
       player.currentTime(previous.timeStamp);
-    else 
+    else
       player.currentTime(0);//if first chapter
     player.play();
     return false;
@@ -58,7 +60,7 @@ var handleNavigation = function() {
 var previousChapter = function() {
   //Map index for chapters
   var chapters = getChaptersWithIndex();
-  
+
   if (!Session.get('currentChapterId')) {
     Session.set('currentChapterId', chapters[0]._id);
   };
@@ -88,12 +90,12 @@ var createVideoProgressBar = function() {
     $('.progress-bar').attr('aria-valuenow', value);
     $('.progress-bar').css('width', value + '%');
 
-    if( !!Comments.findOne({time: currentTime}) ) {
-      var currentTime = player.currentTime();
-      var comment = Comments.findOne({time: currentTime});
-      console.log(comment);
-      $('.comment-item[data-id=' + comment._id + ']').show();
-    }
+    // if( !!Comments.findOne({time: currentTime}) ) {
+    //   var currentTime = player.currentTime();
+    //   var comment = Comments.findOne({time: currentTime});
+    //   console.log(comment);
+    //   $('.comment-item[data-id=' + comment._id + ']').show();
+    // }
 
   });
 

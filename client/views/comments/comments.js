@@ -16,5 +16,14 @@ Template.comments.helpers({
   'chapterTitle': function() {
     if(Session.get('currentChapterId'))
       return Chapters.findOne(Session.get('currentChapterId')).title;
+  },
+  'hoverHelper': function() {
+    handleHover(this);
   }
 });
+
+var handleHover = function (comment) {
+  $('.icon').hover(function() {
+    $(this).siblings().toggle();
+  });
+}
