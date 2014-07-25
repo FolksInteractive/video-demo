@@ -93,7 +93,7 @@ var createVideoProgressBar = function() {
       // var currentTime = player.currentTime();
       var comment = Comments.findOne({time: currentTime});
       console.log(comment);
-      // $('.comment-item[data-id=' + comment._id + ']').show();
+      $('.comment-item[data-id=' + comment._id + '] .comment').show().delay(5000).fadeOut();
     }
 
   });
