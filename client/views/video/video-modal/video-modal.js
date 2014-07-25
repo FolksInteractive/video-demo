@@ -6,7 +6,6 @@ Template.videoModal.rendered = function() {
     Session.set('duration', player.duration());
   });
 
-
   $('.modal').on('hidden.bs.modal', function () {
     player.pause();
   });
@@ -90,12 +89,12 @@ var createVideoProgressBar = function() {
     $('.progress-bar').attr('aria-valuenow', value);
     $('.progress-bar').css('width', value + '%');
 
-    // if( !!Comments.findOne({time: currentTime}) ) {
-    //   var currentTime = player.currentTime();
-    //   var comment = Comments.findOne({time: currentTime});
-    //   console.log(comment);
-    //   $('.comment-item[data-id=' + comment._id + ']').show();
-    // }
+    if( !!Comments.findOne({time: currentTime}) ) {
+      // var currentTime = player.currentTime();
+      var comment = Comments.findOne({time: currentTime});
+      console.log(comment);
+      // $('.comment-item[data-id=' + comment._id + ']').show();
+    }
 
   });
 

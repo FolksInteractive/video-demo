@@ -16,14 +16,15 @@ Template.comments.helpers({
   'chapterTitle': function() {
     if(Session.get('currentChapterId'))
       return Chapters.findOne(Session.get('currentChapterId')).title;
-  },
-  'hoverHelper': function() {
-    handleHover(this);
   }
 });
 
-var handleHover = function (comment) {
-  $('.icon').hover(function() {
-    $(this).siblings().toggle();
-  });
-}
+Template.comments.events({
+  'mouseover .comment-item .icon': function(e) {
+    $(e.target).siblings().show();
+  },
+  'mouseout .comment-item .icon': function (e) {
+    $(e.target).siblings().hide(); 
+  }
+});
+

@@ -2,8 +2,8 @@
   <div class="discussion">
     <div class="comments-wrapper">
       {{#each comments}}
-      <div class="comment-item" data-id="{{_id}}">
-        <div class="row comment" style="left:{{position}}px;">
+      <div class="comment-item" data-id="{{_id}}" style="left:{{position}}px;">
+        <div class="row comment">
 
           <div class="avatar idle">
             <img src="/img/default.png" class="img-responsive img-circle" alt="" />
@@ -14,9 +14,9 @@
             <p class="message">{{body}}</p>
           </div>
         </div>
-        <div class="icon" style="left:{{position}}px;"></div>
+        <div class="icon"></div>
+        {{hoverHelper}}
       </div>
-      {{hoverHelper}}
       {{/each}}
     </div>
 
