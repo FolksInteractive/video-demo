@@ -16,6 +16,16 @@ Template.comments.helpers({
   'chapterTitle': function() {
     if(Session.get('currentChapterId'))
       return Chapters.findOne(Session.get('currentChapterId')).title;
+  },
+  'chapters': function () {
+    return Chapters.find();
+  },
+  'cuePosition': function () {
+    var duration = Session.get('duration');
+    if(!duration)
+      return;
+
+    return this.timeStamp / duration * $('body').width() - 5;
   }
 });
 
