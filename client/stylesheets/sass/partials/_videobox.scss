@@ -24,53 +24,66 @@
   }
 
   .controls {
-    background: RGBA(128, 128, 128, 0.2);
-    width: 100%;
-    height: 40px;
     position: absolute;
-    bottom: 40px;
+    width: 100%;
+    bottom: 50px;
 
     .progress {
-      height: 15px;
-      margin-top: 13px;
-      background: #000000;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 0;
 
       .progress-bar {
-        background: #5CB85C;
+        background: #3aaf84;
       }
     }
   }
 
   .comments-bar {
-    background:#eceff4;
+    background: rgba(255,255,255,0.92);
     width: 100%;
     position: absolute;
     bottom: 0;
-    height: 40px;
+    height: 70px;
 
     .post-comment{
 
+      .play-pause {
+        position: absolute;
+        top: 20px;
+        left: 0px;
+      }
+
       .poster-image{
+        position: absolute;
+        top: 16px;
+        left: 55px;
+
         img{
-          margin-left: 25px;
+
         }
       }
 
       .input{
-        padding-left:0;
-        padding-top: 9px;
-        right: 3px;
+        position: absolute;
+        top: 13px;
+        right: 15px;
+        bottom: 0;
+        left: 100px;
+        height: 30px;
 
         input[type="text"]{
-          border-radius: 0;
-          border: 1px solid #bcc8d8;
-          height: 22px;
-          padding: 0 6px;
+          border-radius: 4px;
+          border: 1px solid #dededf;
+          height: 40px;
+          padding: 0 10px;
           width: 100%;
+          right: 30px;
+          box-shadow: none;
         }
 
         input[type="submit"]{
+          display: none;
           border: 0;
           background: transparent;
           text-indent: -999px;
@@ -80,9 +93,7 @@
           position: absolute;
           right: 19px;
           top: 14px;
-
         }
-
       }
     }
   }
@@ -90,33 +101,63 @@
   .navigation {
     font-size: 20px;
     text-align: center;
-    position: absolute; 
+    position: absolute;
     width: 100%;
     z-index: 1;
+    margin-top: 60px;
+    height: 60px;
+    bottom: 90px;
 
-    h1 {
-      color: #ffffff;
+    .text {
+      position: absolute;
+      font-weight: lighter;
+      width: 720px;
+      height: 60px;
+      left: 50%;
+      margin-left: -360px;
+      display: table;
 
-      .text {
-        font-size: 35px;
+      span {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 24px;
+        color: #fff;
+        background: rgba(0,0,0,0.5);
+        border-radius: 12px;
       }
 
-      .previous-chapter, .next-chapter {
-        position: absolute;
-        cursor: pointer;
-      }
+    }
 
-      .previous-chapter {
-        left: 0;
-      }
+    .previous-chapter, .next-chapter {
+      position: absolute;
+      cursor: pointer;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      /*border: 2px solid #dededf;*/
+      border-radius: 70px;
+      vertical-align: middle;
+      margin-top: 10px;
+      padding-top: 6px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
 
-      .next-chapter {
-        right: 0;
-        -moz-transform: scaleX(-1); /* Gecko */
-        -o-transform: scaleX(-1); /* Operah */
-        -webkit-transform: scaleX(-1); /* webkit */
-        transform: scaleX(-1); /* standard */
+      &:before {
+        font-size: 20px;
+        margin-left: -3px;
       }
+    }
+
+    .previous-chapter {
+      margin-left: -430px;
+    }
+
+    .next-chapter {
+      margin-left: 390px;
+      -moz-transform: scaleX(-1); /* Gecko */
+      -o-transform: scaleX(-1); /* Operah */
+      -webkit-transform: scaleX(-1); /* webkit */
+      transform: scaleX(-1); /* standard */
     }
   }
   .comments {
@@ -150,10 +191,10 @@
 
           .icon {
             background: #ffffff;
-            height: 10px;
-            width: 10px;
+            height: 6px;
+            width: 6px;
             border-radius: 5px;
-            top: 15px;
+            top: 2px;
             position: absolute;
           }
         } 
@@ -172,4 +213,5 @@
 
 .modal-content {
   border-radius: 0;
+  border: 0;
 }
