@@ -13,6 +13,7 @@ Template.videoModal.rendered = function() {
   createVideoProgressBar();
 }
 
+var timeout;
 Template.videoModal.events({
   'submit .comment-form': function(e) {
     e.preventDefault();
@@ -27,6 +28,34 @@ Template.videoModal.events({
 
     $('.comment-form')[0].reset();
     return false;
+  },
+  'click .play-pause': function() {
+    player.play();
+  },
+  'mousemove .modal-dialog': function(e) {
+    e.preventDefault();
+
+    if(timeout) {
+      clearTimeout(timeout);
+      $('.navigation *').show();
+      $('.controls').animate({
+        bottom: '50px'
+      }, 100);
+      $('.comments-bar').animate({
+        bottom: '0px'
+      },100);
+
+    }
+
+    timeout = setTimeout(function(){
+      $('.navigation *').hide(400);
+      $('.controls').animate({
+        bottom: '-15px'
+      }, 100);
+      $('.comments-bar').animate({
+        bottom: '-70px'
+      },100);
+    }, 3000);
   }
 });
 
@@ -92,7 +121,7 @@ var createVideoProgressBar = function() {
     if( !!Comments.findOne({time: currentTime}) ) {
       // var currentTime = player.currentTime();
       var comment = Comments.findOne({time: currentTime});
-      console.log(comment);
+      
       $('.comment-item[data-id=' + comment._id + '] .comment').show().delay(5000).fadeOut();
     }
 

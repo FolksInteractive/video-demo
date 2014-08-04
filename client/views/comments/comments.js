@@ -7,8 +7,8 @@ Template.comments.helpers({
     var duration = Session.get('duration');
     if(!duration)
       return;
-
-    return this.time / duration * $('body').width() - 5;
+    // Progress bar ratio * width - 5 pixels for half of the icon
+    return this.time / duration * $('body').width() - 3;
   },
   'username': function() {
     return Meteor.users.findOne(this.userId).profile.username;
@@ -25,7 +25,7 @@ Template.comments.helpers({
     if(!duration)
       return;
 
-    return this.timeStamp / duration * $('body').width() - 5;
+    return this.timeStamp / duration * $('body').width() - 1;
   }
 });
 
