@@ -29,12 +29,31 @@
     bottom: 50px;
 
     .progress {
-      height: 10px;
+      height: 12px;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 0;
 
       .progress-bar {
         background: #3aaf84;
+        position: relative;
+
+        .controller {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          background: #fff;
+          border-radius: 12px;
+          right: -6px;
+          padding: 4px;
+
+          .controller-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #888;
+            border-radius: 4px;
+          }
+        }
       }
     }
   }
@@ -106,7 +125,7 @@
     z-index: 1;
     margin-top: 60px;
     height: 60px;
-    bottom: 90px;
+    bottom: 110px;
 
     .text {
       position: absolute;
@@ -190,22 +209,23 @@
           }
 
           .icon {
+            position: absolute;
             background: #ffffff;
             height: 6px;
             width: 6px;
-            border-radius: 5px;
-            top: 2px;
-            position: absolute;
+            border-radius: 6px;
+            top: 3px;
           }
         } 
       }
     }
 
     .chapter-cue {
-      width: 10px;
+      width: 2px;
       height: 10px;
-      background: #ffffff;
+      background: #ffff00;
       position: absolute;
+      margin-top: 1px;
     }
   }
 
