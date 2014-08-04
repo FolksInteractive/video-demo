@@ -71,6 +71,15 @@
         position: absolute;
         top: 20px;
         left: 0px;
+        cursor: pointer;
+
+        &:hover {
+          color: $gray-dark;
+        }
+
+        .play {
+          display: none;
+        }
       }
 
       .poster-image{

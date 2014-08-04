@@ -29,32 +29,40 @@ Template.videoModal.events({
     $('.comment-form')[0].reset();
     return false;
   },
-  'click .play-pause': function() {
+  'click .play': function() {
+    $('.pause').toggle();
+    $('.play').toggle();
     player.play();
+  },
+  'click .pause': function() {
+    $('.play').toggle();
+    $('.pause').toggle();
+    player.pause();
   },
   'mousemove .modal-dialog': function(e) {
     e.preventDefault();
 
     if(timeout) {
       clearTimeout(timeout);
-      $('.navigation *').show();
-      $('.controls').animate({
+      $('.navigation *').fadeIn(500);
+      $('.controls').stop().animate({
         bottom: '50px'
-      }, 100);
-      $('.comments-bar').animate({
+      },500, 'easeInOutQuart');
+      $('.comments-bar').stop().animate({
         bottom: '0px'
-      },100);
+      },500, 'easeInOutQuart');
 
     }
 
     timeout = setTimeout(function(){
-      $('.navigation *').hide(400);
-      $('.controls').animate({
-        bottom: '-15px'
-      }, 100);
-      $('.comments-bar').animate({
-        bottom: '-70px'
-      },100);
+      $('.navigation *').fadeOut(500, function() {
+        $('.controls').stop().animate({
+          bottom: '-15px'
+        },500, 'easeInOutQuart');
+        $('.comments-bar').stop().animate({
+          bottom: '-70px'
+        },500, 'easeInOutQuart');
+      });
     }, 3000);
   }
 });

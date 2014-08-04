@@ -3,6 +3,8 @@
     "iron-router": {},
     "scss": {},
     "bootstrap3-sass": {},
-    "popcorn": {}
+    "popcorn": {},
+    "jquery-ui": {},
+    "jquery-easing": {}
   }
 }
