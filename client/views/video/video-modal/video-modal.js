@@ -29,12 +29,16 @@ Template.videoModal.events({
     $('.comment-form')[0].reset();
     return false;
   },
-  'click .play': function() {
-    $('.pause').toggle();
+  'click .play': function(e) {
+    e.preventDefault();    
+
     $('.play').toggle();
+    $('.pause').toggle();
     player.play();
   },
-  'click .pause': function() {
+  'click .pause': function(e) {
+    e.preventDefault();
+
     $('.play').toggle();
     $('.pause').toggle();
     player.pause();
@@ -64,34 +68,55 @@ Template.videoModal.events({
         },500, 'easeInOutQuart');
       });
     }, 3000);
-  }
-});
-
-Template.videoModal.chapterTitle = function() {
-  if(!!Session.get('currentChapterId')) {
-    handleNavigation(); // Call the handle in a reactive manner when chapter changes
-    return Chapters.findOne(Session.get('currentChapterId')).title;
-  }
-}
-
-var handleNavigation = function() {
-  previous = previousChapter();
-  next = nextChapter();
-
-  $('.previous-chapter').on('click', function() {
+  },
+  'click .previous-chapter': function(e) {
+    e.preventDefault();
+    var previous = previousChapter();
+    console.log('previous', previous);
     if(!!previous)
       player.currentTime(previous.timeStamp);
     else
       player.currentTime(0);//if first chapter
     player.play();
     return false;
-  });
-  $('.next-chapter').on('click', function() {
+  },
+  'click .next-chapter': function(e) {
+    e.preventDefault();
+    var next = nextChapter();
+    console.log(next)
     player.currentTime(next.timeStamp);
     player.play();
     return false;
-  });
+  }
+});
+
+Template.videoModal.chapterTitle = function() {
+  if(!!Session.get('currentChapterId')) {
+    // handleNavigation(); // Call the handle in a reactive manner when chapter changes
+    return Chapters.findOne(Session.get('currentChapterId')).title;
+  }
 }
+
+// var handleNavigation = function() {
+//   previous = previousChapter();
+//   next = nextChapter();
+
+//   $('.previous-chapter').on('click', function() {
+//     console.log('previous');
+//     if(!!previous)
+//       player.currentTime(previous.timeStamp);
+//     else
+//       player.currentTime(0);//if first chapter
+//     player.play();
+//     return false;
+//   });
+//   $('.next-chapter').on('click', function() {
+//     console.log(next)
+//     player.currentTime(next.timeStamp);
+//     player.play();
+//     return false;
+//   });
+// }
 
 var previousChapter = function() {
   //Map index for chapters
