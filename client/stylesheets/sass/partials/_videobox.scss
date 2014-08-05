@@ -30,12 +30,15 @@
 
     .progress {
       height: 12px;
+      width: 100%;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 0;
 
       .progress-bar {
         background: #3aaf84;
         position: relative;
+        z-index: 1;
+        width: 100%;
 
         .controller {
           position: absolute;
@@ -54,6 +57,15 @@
             border-radius: 4px;
           }
         }
+      }
+
+      .cursor-overlay {
+        top: 0;
+        left: 0;
+        background-color: #007248;
+        height: inherit;
+        position: absolute;
+        display: none;
       }
     }
   }
@@ -228,6 +240,7 @@
             width: 6px;
             border-radius: 6px;
             top: 3px;
+            z-index: 2;
           }
         } 
       }
@@ -239,6 +252,7 @@
       background: #ffff00;
       position: absolute;
       margin-top: 1px;
+      z-index: 2;
     }
   }
 

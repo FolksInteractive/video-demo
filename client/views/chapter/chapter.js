@@ -51,8 +51,12 @@ var handleChapterChange = function() {
 
         if(time >= timeStamp && time < timeStamps[index + 1])
           return true;
+        else if((index + 1) === timeStamps.length) //For the last chapter
+          return true;
+
+        return false;
       });
-      
+
       if(Chapters.findOne(Session.get('currentChapterId')).timeStamp !== 
         current) {
         Session.set('currentChapterId', 

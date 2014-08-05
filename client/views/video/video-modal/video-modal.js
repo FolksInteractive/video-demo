@@ -72,7 +72,7 @@ Template.videoModal.events({
   'click .previous-chapter': function(e) {
     e.preventDefault();
     var previous = previousChapter();
-    console.log('previous', previous);
+
     if(!!previous)
       player.currentTime(previous.timeStamp);
     else
@@ -83,40 +83,44 @@ Template.videoModal.events({
   'click .next-chapter': function(e) {
     e.preventDefault();
     var next = nextChapter();
-    console.log(next)
     player.currentTime(next.timeStamp);
     player.play();
     return false;
+  },
+  'click .progress': function(e) {
+    e.preventDefault();
+
+    var width = $('body').width(); //Width of nav-bar
+    var xPos = e.pageX;
+
+    var time = (xPos / width) * player.duration();
+
+    player.currentTime(time);
+    player.play();
+
+    return false;
+  },
+  'mouseover .progress': function(e) {
+    e.preventDefault();
+
+    $('.cursor-overlay').toggle();
+  },
+  'mouseout .progress': function(e) {
+    e.preventDefault();
+
+    $('.cursor-overlay').toggle();
+  },
+  'mousemove .progress': function(e) {
+    e.preventDefault();
+    $('.cursor-overlay').width(e.pageX);
   }
 });
 
 Template.videoModal.chapterTitle = function() {
   if(!!Session.get('currentChapterId')) {
-    // handleNavigation(); // Call the handle in a reactive manner when chapter changes
     return Chapters.findOne(Session.get('currentChapterId')).title;
   }
-}
-
-// var handleNavigation = function() {
-//   previous = previousChapter();
-//   next = nextChapter();
-
-//   $('.previous-chapter').on('click', function() {
-//     console.log('previous');
-//     if(!!previous)
-//       player.currentTime(previous.timeStamp);
-//     else
-//       player.currentTime(0);//if first chapter
-//     player.play();
-//     return false;
-//   });
-//   $('.next-chapter').on('click', function() {
-//     console.log(next)
-//     player.currentTime(next.timeStamp);
-//     player.play();
-//     return false;
-//   });
-// }
+};
 
 var previousChapter = function() {
   //Map index for chapters
@@ -131,7 +135,7 @@ var previousChapter = function() {
   });
 
   return chapters[current.index - 1];
-}
+};
 
 var nextChapter = function() {
   var chapters = getChaptersWithIndex();
@@ -141,35 +145,22 @@ var nextChapter = function() {
   });
 
   return chapters[current.index + 1];
-}
+};
 
 var createVideoProgressBar = function() {
   player.on('timeupdate', function() {
     var currentTime = Math.floor(player.currentTime());
     //Green progress
     var value = currentTime/player.duration() * 100;
+
     $('.progress-bar').attr('aria-valuenow', value);
     $('.progress-bar').css('width', value + '%');
 
     if( !!Comments.findOne({time: currentTime}) ) {
-      // var currentTime = player.currentTime();
       var comment = Comments.findOne({time: currentTime});
       
       $('.comment-item[data-id=' + comment._id + '] .comment').show().delay(5000).fadeOut();
     }
 
   });
-
-  hangleProgressBarNavigation();
-}
-
-var hangleProgressBarNavigation = function() {
-  $('.progress').on('click', function(event) {
-    var offSet = $(this).offset();
-    var width = $(this).width();
-    var xPos = (event.pageX - offSet.left);
-    var time = (xPos / width) * player.duration();
-    player.currentTime(time);
-    player.play();
-  });
-}
+};

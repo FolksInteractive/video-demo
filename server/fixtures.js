@@ -22,24 +22,23 @@ if (Meteor.users.find().count() === 0) {
 if (Videos.find().count() === 0) {
   Videos.insert({
     title: 'Techniques de sollicitation',
-    //youtubeUrl: 'https://www.youtube.com/HKCH8HsdcOA?controls=0&modestbranding=1',
-    youtubeUrl: 'https://www.youtube.com/Acx3dUEpSGs?controls=0&modestbranding=1',
+    youtubeUrl: 'http://www.youtube.com/nIlm4yTMSRI?controls=0&modestbranding=1',
     chapters:
     [Chapters.insert({title: "Importance d'une communication efficace", 
       timeStamp: 0}),
     Chapters.insert({title: "Prospection de partenaires industriels", 
-      timeStamp: 900}),
+      timeStamp: 40}),
     Chapters.insert({title: "Approche de partenaires par courriel et par téléphone",
-      timeStamp: 1800}),
+      timeStamp: 80}),
     Chapters.insert({title: "Rencontre avec un partenaire industriel",
-      timeStamp: 2700}),
+      timeStamp: 120}),
     Chapters.insert({title: "Préoccupations d'un employeur potentiel et avantages de recruter un stagiaire",
-      timeStamp: 3600}),
+      timeStamp: 160}),
     Chapters.insert({title: "Les objections",
-      timeStamp: 4500}),
+      timeStamp: 200}),
     Chapters.insert({title: "Possibilités d'une bourse d'études combinée au stage",
-      timeStamp: 5400}),
+      timeStamp: 240}),
     Chapters.insert({title: "Conclusion de la vente et suivi des démarches",
-      timeStamp: 7300})]
+      timeStamp: 280})]
   });
 }
