@@ -34,7 +34,6 @@
     width: 100px;
     text-align: center;
     border-radius: 0 0 5px 5px;
-    cursor: pointer;
     z-index: 2;
 
     * {
@@ -238,17 +237,17 @@
       z-index: 2;
     }
   }
-
   .discussion {
-    height: 50%;
+    height: 300px;
     width: 300px;
     position: absolute;
     right: 10%;
-    top: 25%;
+    top: -336px;
+    margin-left: -150px;
     bottom: 35%;
     display: none;
     z-index: 2;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .7);
     border-radius: 15px;
 
     .avatar {
@@ -275,7 +274,22 @@
       margin-left: 45px;
       margin-right: 20px;
     }
+    
+    .arrow {
+      height: 50px;
+      width: 50px;
+      position: absolute;
+      @include rotate(-90deg);
+      color: rgba(0, 0, 0, .7);
+      bottom: -77px; 
+      left: 100px;
+
+      &:before {
+        font-size: 80px;
+      }
+    }
   }
+
 }
 
 .modal-backdrop {

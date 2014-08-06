@@ -175,8 +175,8 @@ Template.videoModal.chapterIndex = function() {
   var current = _.find(chapters, function(chapter) {
     return chapter._id === Session.get('currentChapterId');
   });
-
-  return (current.index + 1) + " / " + chapters.length;
+  if(!!current)
+    return (current.index + 1) + " / " + chapters.length;
 }
 
 var nextChapter = function() {

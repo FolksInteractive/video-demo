@@ -24,6 +24,19 @@ Template.commentCues.events({
     Session.set('commentTimeout', Meteor.setTimeout(function() {
       $('.discussion[data-id='+ id +']').hide();
     }, 4000));
+  },
+  'mouseover .discussion': function(e) {
+    e.preventDefault();
+    clearTimeout(Session.get('commentTimeout'));
+    var target = $(e.target);
+    if(target.is('div'))
+      target.show();
+  },
+  'mouseout .discussion': function(e) {
+    e.preventDefault();
+    var target = $(e.target);
+    if(target.is('div'))
+      target.hide();
   }
 });
 

@@ -1,4 +1,4 @@
-Template.comments.helpers({
+Template.comment.helpers({
   'comments': function() {
     return Comments.find();
   },
@@ -7,7 +7,7 @@ Template.comments.helpers({
   }
 });
 
-Template.comments.events({
+Template.comment.events({
   'mouseover .discussion': function(e) {
     e.preventDefault();
 

@@ -1,5 +1,9 @@
 <template name='commentCues'>
   {{#each comments}}
   <div class="comment-cue" data-id="{{_id}}" style="left:{{position}}px;"></div>
+  <div class="discussion" data-id="{{_id}}" style="left:{{position}}px;">
+    {{> comment}}
+    <span class="arrow flaticon-arrow395"></span>
+  </div>
   {{/each}}
 </template>
