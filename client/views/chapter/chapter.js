@@ -65,10 +65,16 @@ var handleChapterChange = function() {
         current) {
         Session.set('currentChapterId', 
           Chapters.findOne({'timeStamp': current})._id);
+      
+        $('.navigation .text').fadeIn(500);
+        setTimeout(function() {
+          $('.navigation .text').fadeOut(500);  
+        }, 3000);
+
         updateSubscription();
       }
-    } 
-  });
+  } 
+});
 };
 
 var updateSubscription = function() {

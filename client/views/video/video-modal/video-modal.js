@@ -8,6 +8,16 @@ Template.videoModal.rendered = function() {
 
     $('.play').toggle();
     $('.pause').toggle();
+
+    //Animate chapter title in a reactive maner
+    var currentChapter = Session.get('currentChapterId');
+    console.log(currentChapter)
+    if(!!currentChapter) {
+      $('.navigation .text').fadeIn(500);
+      setTimeout(function() {
+        $('.navigation .text').fadeOut(500);  
+      }, 3000);
+    }
   });
 
   player.on('pause', function() {
@@ -48,31 +58,29 @@ Template.videoModal.events({
     e.preventDefault();
     player.pause();
   },
-  'mousemove .modal-dialog': function(e) {
+  'mousemove .navigation': function(e) {
     e.preventDefault();
 
-    if(timeout) {
+    if(!!timeout) {
       clearTimeout(timeout);
-      $('.navigation *').fadeIn(500);
-      $('.controls').stop().animate({
-        bottom: '50px'
-      },500, 'easeInOutQuart');
-      $('.comments-bar').stop().animate({
-        bottom: '0px'
-      },500, 'easeInOutQuart');
-
     }
+    $('.controls').stop().animate({
+      bottom: '50px'
+    },500, 'easeInOutQuart');
+    $('.comments-bar').stop().animate({
+      bottom: '0px'
+    },500, 'easeInOutQuart');
+
 
     timeout = setTimeout(function(){
-      $('.navigation *').fadeOut(500, function() {
-        $('.controls').stop().animate({
-          bottom: '-15px'
-        },500, 'easeInOutQuart');
-        $('.comments-bar').stop().animate({
-          bottom: '-70px'
-        },500, 'easeInOutQuart');
-      });
-    }, 3000);
+      $('.controls').stop().animate({
+        bottom: '-15px'
+      },500, 'easeInOutQuart');
+      $('.comments-bar').stop().animate({
+        bottom: '-70px'
+      },500, 'easeInOutQuart');
+
+    }, 1000);
   },
   'click .previous-chapter': function(e) {
     e.preventDefault();
@@ -125,7 +133,20 @@ Template.videoModal.events({
       player.pause();    
     else
       player.play();
-  }
+  },
+  'mouseover .comments-bar, .controls': function(e) {
+    e.preventDefault();
+
+    if(timeout) {
+      clearTimeout(timeout);
+      // $('.controls').animate({
+      //   bottom: '50px'
+      // },500, 'easeInOutQuart');
+      // $('.comments-bar').animate({
+      //   bottom: '0px'
+      // },500, 'easeInOutQuart');
+}
+}
 });
 
 Template.videoModal.chapterTitle = function() {

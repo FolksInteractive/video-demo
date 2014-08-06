@@ -33,6 +33,7 @@
       width: 100%;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 0;
+      cursor: pointer;
 
       .progress-bar {
         background: #3aaf84;
@@ -144,26 +145,24 @@
     position: absolute;
     width: 100%;
     z-index: 1;
-    height: 100%;
-    bottom: 110px;
+    height: calc(100% - 80px);
 
     * {
-      bottom: 0;
+      top: calc(50% - 80px);
     }
 
     .text {
       position: absolute;
       font-weight: lighter;
-      width: 720px;
-      height: 60px;
-      left: 50%;
-      margin-left: -360px;
+      width: 1080px;
+      height: 90px;
+      left: calc(50% - 540px);
       display: table;
 
       span {
         display: table-cell;
         vertical-align: middle;
-        font-size: 24px;
+        font-size: 48px;
         color: #fff;
         background: rgba(0, 0, 0, .5);
         border-radius: 12px;
@@ -172,35 +171,30 @@
     }
 
     .previous-chapter, .next-chapter {
+      background: rgba(128, 128, 128, .2);
       position: absolute;
       cursor: pointer;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      border-radius: 70px;
+      width: 160px;
+      height: 160px;
+      border-radius: 80px;
+      padding-left: 30px;
+      padding-top: 22px;
       vertical-align: middle;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding-top: 6px;
       color: #fff;
-      background: rgba(0, 0, 0, .5);
+      top: calc(50% - 120px);
 
       &:before {
-        font-size: 20px;
-        margin-left: -3px;
+        font-size: 80px;
       }
     }
 
     .previous-chapter {
-      margin-left: -430px;
+      left: -80px;
     }
 
     .next-chapter {
-      margin-left: 390px;
-      -moz-transform: scaleX(-1); /* Gecko */
-      -o-transform: scaleX(-1); /* Operah */
-      -webkit-transform: scaleX(-1); /* webkit */
-      transform: scaleX(-1); /* standard */
+      right: -80px;
+      @include scale(-1);
     }
   }
 
@@ -231,7 +225,7 @@
     width: 300px;
     position: absolute;
     right: 10%;
-    top: 15%;
+    top: 25%;
     bottom: 35%;
     display: none;
     z-index: 2;
