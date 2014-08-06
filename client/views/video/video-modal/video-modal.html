@@ -1,11 +1,13 @@
 <template name="videoModal">
   <div class="modal fade" id="video-box" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="video-box">
     <div class="modal-dialog modal-lg">
+
       <div class="navigation">
           <div class='flaticon-arrow395 previous-chapter'></div>
           <div class='text'><span>{{chapterTitle}}</span></div>
           <div class='flaticon-arrow395 next-chapter'></div>
       </div>
+
       <div class="modal-content">
         <div class="modal-body">
           <div class="container-fluid">
@@ -13,8 +15,11 @@
 
               <div class="player"></div>
 
-              <div class="comment-box">
+<!--               <div class="comment-box">
                 {{> comments}}
+              </div> -->
+              <div class="index">
+                <p>{{chapterIndex}}</p>
               </div>
 
               <div class="controls">

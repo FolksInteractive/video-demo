@@ -23,6 +23,25 @@
     width: 100%;
   }
 
+  .index {
+    color: #fff;
+    font-size: 24px;
+    background-color: rgba(128, 128, 128, .5);
+    right: 15%;
+    top: 0;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    z-index: 2;
+
+    * {
+      margin-top: 20px;
+    }
+  }
+
   .controls {
     position: absolute;
     width: 100%;
@@ -31,7 +50,7 @@
     .progress {
       height: 12px;
       width: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, .5);
       border-radius: 0;
       cursor: pointer;
 

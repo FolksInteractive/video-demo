@@ -139,14 +139,14 @@ Template.videoModal.events({
 
     if(timeout) {
       clearTimeout(timeout);
-      // $('.controls').animate({
-      //   bottom: '50px'
-      // },500, 'easeInOutQuart');
-      // $('.comments-bar').animate({
-      //   bottom: '0px'
-      // },500, 'easeInOutQuart');
-}
-}
+    }
+  },
+  'mouseover .index': function() {
+    $('.navigation .text').show();
+  },
+  'mouseout .index': function() {
+    $('.navigation .text').hide();    
+  }
 });
 
 Template.videoModal.chapterTitle = function() {
@@ -169,6 +169,15 @@ var previousChapter = function() {
 
   return chapters[current.index - 1];
 };
+
+Template.videoModal.chapterIndex = function() {
+  var chapters = getChaptersWithIndex();
+  var current = _.find(chapters, function(chapter) {
+    return chapter._id === Session.get('currentChapterId');
+  });
+
+  return (current.index + 1) + " / " + chapters.length;
+}
 
 var nextChapter = function() {
   var chapters = getChaptersWithIndex();
