@@ -1,13 +1,13 @@
 Template.home.rendered = function() {
   $('.accounts-error').hide();
-}
+};
 
 Template.home.events({
   //Login form
   'submit .login-form' : function(e, t){
     e.preventDefault();
-    var email = t.find('#email').value
-    , password = t.find('#password').value;
+    var email = t.find('#email').value, 
+    password = t.find('#password').value;
 
     Meteor.loginWithPassword(email, password, function(err){
       if (err) {

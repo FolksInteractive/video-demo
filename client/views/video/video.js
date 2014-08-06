@@ -29,4 +29,4 @@ Template.video.rendered = function() {
     else 
       $('.head').slideDown(500);
   });
-}
+};

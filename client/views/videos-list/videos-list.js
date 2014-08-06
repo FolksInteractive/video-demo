@@ -23,4 +23,4 @@ Template.videosList.events({
 
 Template.videoItem.commentsAmount = function() {
   return Comments.find().count();
-}
+};

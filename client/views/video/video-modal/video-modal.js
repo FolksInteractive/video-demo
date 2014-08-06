@@ -4,6 +4,17 @@ Template.videoModal.rendered = function() {
 
   player.on('play', function() {
     Session.set('duration', player.duration());
+    Session.set('playing', true);
+
+    $('.play').toggle();
+    $('.pause').toggle();
+  });
+
+  player.on('pause', function() {
+    Session.set('playing', false);
+
+    $('.play').toggle();
+    $('.pause').toggle();
   });
 
   $('.modal').on('hidden.bs.modal', function () {
@@ -11,7 +22,7 @@ Template.videoModal.rendered = function() {
   });
 
   createVideoProgressBar();
-}
+};
 
 var timeout;
 Template.videoModal.events({
@@ -31,16 +42,10 @@ Template.videoModal.events({
   },
   'click .play': function(e) {
     e.preventDefault();    
-
-    $('.play').toggle();
-    $('.pause').toggle();
     player.play();
   },
   'click .pause': function(e) {
     e.preventDefault();
-
-    $('.play').toggle();
-    $('.pause').toggle();
     player.pause();
   },
   'mousemove .modal-dialog': function(e) {
@@ -92,8 +97,8 @@ Template.videoModal.events({
 
     var width = $('body').width(); //Width of nav-bar
     var xPos = e.pageX;
-
-    var time = (xPos / width) * player.duration();
+    //Get time from position percentage
+    var time = (xPos / width) * player.duration(); 
 
     player.currentTime(time);
     player.play();
@@ -113,6 +118,13 @@ Template.videoModal.events({
   'mousemove .progress': function(e) {
     e.preventDefault();
     $('.cursor-overlay').width(e.pageX);
+  },
+  'click .navigation': function(e) {
+    e.preventDefault();
+    if(Session.get('playing'))
+      player.pause();    
+    else
+      player.play();
   }
 });
 
@@ -128,7 +140,7 @@ var previousChapter = function() {
 
   if (!Session.get('currentChapterId')) {
     Session.set('currentChapterId', chapters[0]._id);
-  };
+  }
 
   var current = _.find(chapters, function(chapter) {
     return chapter._id === Session.get('currentChapterId');
@@ -159,7 +171,11 @@ var createVideoProgressBar = function() {
     if( !!Comments.findOne({time: currentTime}) ) {
       var comment = Comments.findOne({time: currentTime});
       
-      $('.comment-item[data-id=' + comment._id + '] .comment').show().delay(5000).fadeOut();
+      $('.discussion[data-id=' + comment._id + ']').show();
+
+      Session.set('commentTimeout', setTimeout(function() {
+        $('.discussion[data-id=' + comment._id + ']').hide();
+      }, 4000));
     }
 
   });

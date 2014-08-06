@@ -1,0 +1,9 @@
+<template name="comments">
+  {{#each comments}}
+    <div class="discussion" data-id="{{_id}}">
+      <img class="avatar" src="/img/default.png"/>
+      <span class="author">{{name}}</span>
+      <p class="body">{{body}}</p>
+    </div>
+  {{/each}}
+</template>
