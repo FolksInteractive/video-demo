@@ -122,6 +122,7 @@ Template.videoModal.events({
     e.preventDefault();
 
     $('.cursor-overlay').toggle();
+    $('.cursor-overlay').width(0);
   },
   'mousemove .progress': function(e) {
     e.preventDefault();
@@ -201,7 +202,12 @@ var createVideoProgressBar = function() {
     if( !!Comments.findOne({time: currentTime}) ) {
       var comment = Comments.findOne({time: currentTime});
       
-      $('.discussion[data-id=' + comment._id + ']').show();
+
+      $('.discussion[data-id='+ comment._id +']').show().animate({
+        'top': '-336px',
+        'opacity': '1',
+        'z-index': '2'
+      }, 400);
 
       Session.set('commentTimeout', setTimeout(function() {
         $('.discussion[data-id=' + comment._id + ']').hide();
