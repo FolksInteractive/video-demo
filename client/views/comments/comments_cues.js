@@ -27,13 +27,14 @@ Template.commentCues.helpers({
     var duration = Session.get('duration');
     if(!duration)
       return;
+
     var pos = this.time / duration * $('body').width() - 3;
+
     if(pos <= 150) 
       return pos - 50;
-    else if(pos >= ($('body').width() - 300)) {
-      console.log(pos);
+    else if(pos >= ($('body').width() - 300)) 
       return 225;
-    }
+
   }
 });
 
@@ -41,13 +42,11 @@ Template.commentCues.events({
   'mouseover .comment-cue': function(e) {
     e.preventDefault();
     var discussion = $('.discussion[data-id='+ this._id +']');
-
     discussion.show().animate({
       'top': '-336px',
       'opacity': '1',
       'z-index': '2'
     }, 400);
-    $('.cursor-overlay').toggle();
   },
   'mouseout .comment-cue': function(e) {
     e.preventDefault();
@@ -61,8 +60,7 @@ Template.commentCues.events({
   },
   'mouseover .discussion': function(e) {
     e.preventDefault();
-
-    console.log(e.target)
+    $('.cursor-overlay').toggle();
     clearTimeout(Session.get('commentTimeout'));
     var target = $(e.target);
     if(target.is('div')) {
@@ -72,8 +70,14 @@ Template.commentCues.events({
   'mouseout .discussion': function(e) {
     e.preventDefault();
     var target = $(e.target);
-    if(target.is('div'))
-      target.hide();
-  }
+    if(target.is('div')) 
+      Meteor.setTimeout(function() {
+        target.animate({
+          top: '0px',
+          opacity: '0'
+        }, 400).hide();
+      }, 4000);
+    
+}
 });
 

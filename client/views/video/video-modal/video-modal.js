@@ -11,7 +11,7 @@ Template.videoModal.rendered = function() {
 
     //Animate chapter title in a reactive maner
     var currentChapter = Session.get('currentChapterId');
-    console.log(currentChapter)
+
     if(!!currentChapter) {
       $('.navigation .text').fadeIn(500);
       setTimeout(function() {
@@ -63,24 +63,30 @@ Template.videoModal.events({
 
     if(!!timeout) {
       clearTimeout(timeout);
+      $('.controls').stop().animate({
+        bottom: '50px'
+      }, 700, 'easeInOutQuart');
+      $('.comments-bar').stop().animate({
+        bottom: '0px'
+      }, 700, 'easeInOutQuart');
     }
-    $('.controls').stop().animate({
-      bottom: '50px'
-    },500, 'easeInOutQuart');
-    $('.comments-bar').stop().animate({
-      bottom: '0px'
-    },500, 'easeInOutQuart');
-
+    else {
+      $('.controls').animate({
+        bottom: '50px'
+      }, 700, 'easeInOutQuart');
+      $('.comments-bar').animate({
+        bottom: '0px'
+      }, 700, 'easeInOutQuart');
+    }
 
     timeout = setTimeout(function(){
       $('.controls').stop().animate({
         bottom: '-15px'
-      },500, 'easeInOutQuart');
+      }, 700, 'easeInOutQuart');
       $('.comments-bar').stop().animate({
         bottom: '-70px'
-      },500, 'easeInOutQuart');
-
-    }, 1000);
+      }, 700, 'easeInOutQuart');
+    }, 2500);
   },
   'click .previous-chapter': function(e) {
     e.preventDefault();
@@ -201,7 +207,6 @@ var createVideoProgressBar = function() {
 
     if( !!Comments.findOne({time: currentTime}) ) {
       var comment = Comments.findOne({time: currentTime});
-      
 
       $('.discussion[data-id='+ comment._id +']').show().animate({
         'top': '-336px',
@@ -209,9 +214,13 @@ var createVideoProgressBar = function() {
         'z-index': '2'
       }, 400);
 
-      Session.set('commentTimeout', setTimeout(function() {
-        $('.discussion[data-id=' + comment._id + ']').hide();
+      Session.set('commentTimeout', Meteor.setTimeout(function() {
+        $('.discussion[data-id='+ comment._id +']').hide().animate({
+          top: '0px',
+          opacity: '0'
+        }, 400);
       }, 4000));
+
     }
 
   });
