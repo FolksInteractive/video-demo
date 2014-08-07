@@ -16,9 +16,11 @@ Template.commentCues.helpers({
       return;
 
     var pos = this.time / duration * $('body').width() - 3;
-    if(pos <= 150) {
+    if(pos <= 150) 
       return 150;
-    }
+    else if(pos >= ($('body').width() -300))
+      return pos - 125;
+
     return pos;
   },
   'arrowFix': function() {
@@ -26,8 +28,11 @@ Template.commentCues.helpers({
     if(!duration)
       return;
     var pos = this.time / duration * $('body').width() - 3;
-    if(pos <= 150) {
+    if(pos <= 150) 
       return pos - 50;
+    else if(pos >= ($('body').width() - 300)) {
+      console.log(pos);
+      return 225;
     }
   }
 });
