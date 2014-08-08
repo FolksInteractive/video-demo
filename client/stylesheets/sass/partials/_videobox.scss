@@ -23,11 +23,11 @@
     width: 100%;
   }
 
-  .index {
+  .index, .exit {
     color: #fff;
     font-size: 24px;
     background-color: rgba(128, 128, 128, .5);
-    right: 15%;
+    right: 120px;
     top: 0;
     position: absolute;
     height: 100px;
@@ -39,6 +39,11 @@
     * {
       margin-top: 20px;
     }
+  }
+
+  .exit {
+    right: 10px;
+    cursor: pointer;
   }
 
   .controls {
@@ -249,58 +254,64 @@
       z-index: 2;
     }
   }
-  .discussion {
-    height: 300px;
-    width: 300px;
+
+  .comments {
     position: absolute;
-    right: 10%;
-    margin-left: -154px;
-    bottom: 35%;
-    display: none;
-    z-index: 0;
-    background-color: rgba(0, 0, 0, .7);
-    border-radius: 15px;
+    bottom: 15px;
 
-    .avatar {
-      border-radius: 15px;
-      height: 30px;
-      left: 10px;
+    .discussion {
+      height: 300px;
+      width: 300px;
       position: absolute;
-      top: 10px;
-      width: 30px;
+      right: 10%;
+      margin-left: -154px;
+      bottom: 35%;
+      display: none;
       z-index: 0;
-    }
+      background-color: rgba(0, 0, 0, .7);
+      border-radius: 15px;
 
-    .author {
-      top: 15px;
-      left: 55px;
-      position: absolute;
-    }
+      .avatar {
+        border-radius: 15px;
+        height: 30px;
+        left: 10px;
+        position: absolute;
+        top: 10px;
+        width: 30px;
+        z-index: 0;
+      }
 
-    .body {
-      color: #fff;
-      font-size: 20px;
-      overflow: hidden;
-      margin-top: 50px;
-      margin-left: 45px;
-      margin-right: 20px;
-    }
-    
-    .arrow {
-      height: 50px;
-      width: 50px;
-      position: absolute;
-      @include rotate(-90deg);
-      color: rgba(0, 0, 0, .7);
-      bottom: -77px; 
-      left: 100px;
+      .author {
+        top: 15px;
+        left: 55px;
+        position: absolute;
+      }
 
-      &:before {
-        font-size: 80px;
+      .body {
+        color: #fff;
+        font-size: 20px;
+        overflow: hidden;
+        margin-top: 50px;
+        margin-left: 45px;
+        margin-right: 20px;
+      }
+
+      .arrow {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        @include rotate(-90deg);
+        color: rgba(0, 0, 0, .7);
+        bottom: -77px; 
+        left: 100px;
+        z-index: 0;
+
+        &:before {
+          font-size: 80px;
+        }
       }
     }
   }
-
 }
 
 .modal-backdrop {

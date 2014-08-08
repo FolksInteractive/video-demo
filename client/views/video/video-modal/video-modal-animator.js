@@ -26,17 +26,18 @@ ModalAnimator.prototype.displayComment = function(commentId) {
   $('.discussion[data-id='+ commentId +']').show().animate({  
     'top': '-336px',
     'opacity': '1',
-    'z-index': '2'
+    'z-index': '3'
   }, 400);
 };
 
 ModalAnimator.prototype.hideComment = function(commentId) {
   this.commentTimeout = Meteor.setTimeout(function() {
-    $('.discussion[data-id='+ commentId +']').hide().animate({
-      top: '0px',
-      opacity: '0'
-    }, 400);
-  }, 4000);
+    $('.discussion[data-id='+ commentId +']').animate({
+      'top': '0px',
+      'opacity': '0',
+      'z-index': '0'
+    }, 400).hide();
+  }, 3000);
 };
 
 /*
@@ -104,4 +105,6 @@ ModalAnimator.prototype.hideCommentForm = function() {
     bottom: '25px'
   }, 500, 'easeInOutQuart');
   $('.navigation').css('height', 'calc(100% - 15px)');
+
+  this.commentFormToggled = false;
 }

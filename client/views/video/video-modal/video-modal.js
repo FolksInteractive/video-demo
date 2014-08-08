@@ -30,13 +30,15 @@ Template.videoModal.events({
     e.preventDefault();
 
     var text = $(e.target).find('input[name=body]').val();
-    var time;
 
     var comment = Comments.insert({
       body: text,
       userId: Meteor.userId(),
       chapterId: Session.get('currentChapterId'),
-      time: Math.floor(player.currentTime())
+      time: Session.get('commentTime')
+    }, function(err) {
+      if(err)
+        console.log(err);
     });
 
     $('.comment-form')[0].reset();
@@ -45,7 +47,6 @@ Template.videoModal.events({
     return false;
   },
   'click .previous-chapter': function(e) {
-    e.preventDefault();
     var previous = previousChapter();
 
     if(!!previous)
@@ -53,33 +54,28 @@ Template.videoModal.events({
     else
       player.currentTime(0);//if first chapter
     player.play();
-    return false;
   },
   'click .next-chapter': function(e) {
-    e.preventDefault();
     var next = nextChapter();
     player.currentTime(next.timeStamp);
     player.play();
     return false;
   },
   'click .progress': function(e) {
-    e.preventDefault();
-
-    var width = $('body').width(); //Width of nav-bar
     var xPos = e.pageX;
-    //Get time from position percentage
-    var time = (xPos / width) * player.duration(); 
+    var time = getClickTime(xPos); 
 
     player.currentTime(time);
     player.play();
-
-    return false;
+  },
+  'click .exit': function(e) {
+    $('.modal').modal('hide');
   },
   'mouseenter .progress': function(e) {
     animator.displayProgressOverlay();
     animator.displayCommentPopup();
   },
-  'mouseleave .progress-bar': function(e) {
+  'mouseleave .progress': function(e) {
     animator.hideProgressOverlay();
   },
   'mousemove .progress': function(e) {
@@ -89,11 +85,15 @@ Template.videoModal.events({
   'mouseenter .comment-popup': function() {
     animator.hideProgressOverlay();
   },
-  'click .comment-popup': function() {
+  'click .comment-popup': function(e) {
     if(!animator.commentFormToggled)
       animator.displayCommentForm();
     else
       animator.hideCommentForm();
+
+    var xPos = e.pageX;
+    var time = getClickTime(xPos); 
+    Session.set('commentTime', time);
   },
   'mouseenter .navigation': function() {
     animator.hideCommentPopup();
@@ -141,6 +141,12 @@ var nextChapter = function() {
   return chapters[current.index + 1];
 };
 
+var getClickTime = function(xPosition) {
+  var width = $('body').width(); //Width of nav-bar
+  //Get time from position percentage
+  return (xPosition / width) * player.duration(); 
+};
+
 /**************
 * PLAYER EVENTS
 ***************/
@@ -174,7 +180,6 @@ var handlePlayerEvents = function() {
 
       animator.displayComment(comment._id);
       animator.hideComment(comment._id);
-
     }
   });
 };

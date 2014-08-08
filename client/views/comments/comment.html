@@ -1,5 +1,10 @@
-<template name="comment">
-  <img class="avatar" src="/img/default.png"/>
-  <span class="author">{{name}}</span>
-  <p class="body">{{body}}</p>
+<template name="comments">
+  {{#each comments}}
+    <div class="discussion" data-id="{{_id}}" style="left:{{discussionPos}}px;">
+      <img class="avatar" src="/img/default.png"/>
+      <span class="author">{{name}}</span>
+      <p class="body">{{body}}</p>
+      <span class="arrow flaticon-arrow395" style="left:{{arrowFix}}px;"></span>
+    </div>
+  {{/each}}
 </template>
