@@ -23,12 +23,12 @@ Template.comments.helpers({
     if(!duration)
       return;
 
-    var pos = this.time / duration * $('body').width() - 3;
+    var pos = this.time / duration * $('body').width() - 6;
 
     if(pos <= 150) 
       return pos - 50;
     else if(pos >= ($('body').width() - 300)) 
-      return 225;
+      return 223;
   }
 });
 
@@ -36,7 +36,8 @@ Template.comments.events({
   'mouseenter .discussion': function(e) {
     e.preventDefault();
 
-    animator.displayComment(this._id);
+    Meteor.clearTimeout(animator.commentTimeout);
+    // animator.displayComment(this._id);
     animator.hideCommentPopup();
     animator.hideProgressOverlay();
   },

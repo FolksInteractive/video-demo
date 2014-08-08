@@ -16,10 +16,12 @@ Template.commentCues.events({
   'mouseenter .comment-cue': function(e) {
     e.preventDefault();
     animator.displayComment(this._id);
+    animator.hideCommentPopup();
   },
   'mouseleave .comment-cue': function(e) {
     e.preventDefault();
     var commentId = $(e.target).data('id');
     animator.hideComment(commentId);
+    animator.displayCommentPopup();
   }
 });

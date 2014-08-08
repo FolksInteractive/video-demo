@@ -21,12 +21,10 @@ ModalAnimator.prototype.hideChapterTitle = function() {
 * Comment
 */
 ModalAnimator.prototype.displayComment = function(commentId) {
-  Meteor.clearTimeout(this.commentTimeout); //Stop hide from cue out
-
   $('.discussion[data-id='+ commentId +']').show().animate({  
     'top': '-336px',
     'opacity': '1',
-    'z-index': '3'
+    'z-index': '0'
   }, 400);
 };
 
@@ -35,8 +33,8 @@ ModalAnimator.prototype.hideComment = function(commentId) {
     $('.discussion[data-id='+ commentId +']').animate({
       'top': '0px',
       'opacity': '0',
-      'z-index': '0'
-    }, 400).hide();
+      'z-index': '-1'
+    }, 400);
   }, 3000);
 };
 
@@ -45,17 +43,17 @@ ModalAnimator.prototype.hideComment = function(commentId) {
 */
 ModalAnimator.prototype.displayCommentPopup = function() {
   Meteor.clearTimeout(this.popupTimeout);
-  $('.comment-popup').show();
+  $('.comment-popup').show(500);
 };
 
 ModalAnimator.prototype.hideCommentPopup = function() {  
   this.popupTimeout = Meteor.setTimeout(function() {
-    $('.comment-popup').hide(800);
-  }, 3000);
+    $('.comment-popup').hide(500);
+  }, 1000);
 };
 
 ModalAnimator.prototype.moveCommentPopup = function(xValue) {
-  $('.comment-popup').show();
+  // $('.comment-popup').show();
   $('.comment-popup').css('left', xValue + "px");
 };
 
