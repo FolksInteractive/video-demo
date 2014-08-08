@@ -34,50 +34,29 @@ Template.commentCues.helpers({
       return pos - 50;
     else if(pos >= ($('body').width() - 300)) 
       return 225;
-
   }
 });
 
 Template.commentCues.events({
-  'mouseover .comment-cue': function(e) {
+  'mouseenter .comment-cue': function(e) {
     e.preventDefault();
-    var discussion = $('.discussion[data-id='+ this._id +']');
-    discussion.show().animate({
-      'top': '-336px',
-      'opacity': '1',
-      'z-index': '2'
-    }, 400);
+    animator.displayComment(this._id);
   },
-  'mouseout .comment-cue': function(e) {
+  'mouseleave .comment-cue': function(e) {
     e.preventDefault();
-    var id = $(e.target).data('id');
-    Session.set('commentTimeout', Meteor.setTimeout(function() {
-      $('.discussion[data-id='+ id +']').animate({
-        top: '0px',
-        opacity: '0'
-      }, 400);
-    }, 4000));
+    var commentId = $(e.target).data('id');
+    animator.hideComment(commentId);
   },
-  'mouseover .discussion': function(e) {
+  'mouseenter .discussion': function(e) {
     e.preventDefault();
-    $('.cursor-overlay').toggle();
-    clearTimeout(Session.get('commentTimeout'));
-    var target = $(e.target);
-    if(target.is('div')) {
-      target.show();
-    }
+    var commentId = $(e.target).data('id');
+    animator.displayComment(commentId);
+    animator.hideCommentPopup();
+    animator.hideProgressOverlay();
   },
-  'mouseout .discussion': function(e) {
+  'mouseleave .discussion': function(e) {
     e.preventDefault();
-    var target = $(e.target);
-    if(target.is('div')) 
-      Meteor.setTimeout(function() {
-        target.animate({
-          top: '0px',
-          opacity: '0'
-        }, 400).hide();
-      }, 4000);
-    
-}
+    var commentId = $(e.target).data('id');
+    animator.hideComment(commentId);
+  }
 });
-

@@ -2,44 +2,36 @@ Template.videoModal.rendered = function() {
   var video = Videos.findOne(Session.get('currentVideoId'));
   player = Popcorn.youtube('.player', video.youtubeUrl);
 
-  player.on('play', function() {
-    Session.set('duration', player.duration());
-    Session.set('playing', true);
-
-    $('.play').toggle();
-    $('.pause').toggle();
-
-    //Animate chapter title in a reactive maner
-    var currentChapter = Session.get('currentChapterId');
-
-    if(!!currentChapter) {
-      $('.navigation .text').fadeIn(500);
-      setTimeout(function() {
-        $('.navigation .text').fadeOut(500);  
-      }, 3000);
-    }
-  });
-
-  player.on('pause', function() {
-    Session.set('playing', false);
-
-    $('.play').toggle();
-    $('.pause').toggle();
-  });
-
   $('.modal').on('hidden.bs.modal', function () {
     player.pause();
   });
 
-  createVideoProgressBar();
+  handlePlayerEvents();
 };
 
-var timeout;
+Template.videoModal.helpers({
+  'chapterTitle': function() {
+    if(!!Session.get('currentChapterId')) {
+      return Chapters.findOne(Session.get('currentChapterId')).title;
+    }
+  },
+  'chapterIndex': function() {
+    var chapters = getChaptersWithIndex();
+    var current = _.find(chapters, function(chapter) {
+      return chapter._id === Session.get('currentChapterId');
+    });
+    if(!!current)
+      return (current.index + 1) + " / " + chapters.length;
+  }
+});
+
 Template.videoModal.events({
   'submit .comment-form': function(e) {
     e.preventDefault();
 
     var text = $(e.target).find('input[name=body]').val();
+    var time;
+
     var comment = Comments.insert({
       body: text,
       userId: Meteor.userId(),
@@ -48,45 +40,9 @@ Template.videoModal.events({
     });
 
     $('.comment-form')[0].reset();
+    animator.hideCommentForm();
+
     return false;
-  },
-  'click .play': function(e) {
-    e.preventDefault();    
-    player.play();
-  },
-  'click .pause': function(e) {
-    e.preventDefault();
-    player.pause();
-  },
-  'mousemove .navigation': function(e) {
-    e.preventDefault();
-
-    if(!!timeout) {
-      clearTimeout(timeout);
-      $('.controls').stop().animate({
-        bottom: '50px'
-      }, 700, 'easeInOutQuart');
-      $('.comments-bar').stop().animate({
-        bottom: '0px'
-      }, 700, 'easeInOutQuart');
-    }
-    else {
-      $('.controls').animate({
-        bottom: '50px'
-      }, 700, 'easeInOutQuart');
-      $('.comments-bar').animate({
-        bottom: '0px'
-      }, 700, 'easeInOutQuart');
-    }
-
-    timeout = setTimeout(function(){
-      $('.controls').stop().animate({
-        bottom: '-15px'
-      }, 700, 'easeInOutQuart');
-      $('.comments-bar').stop().animate({
-        bottom: '-70px'
-      }, 700, 'easeInOutQuart');
-    }, 2500);
   },
   'click .previous-chapter': function(e) {
     e.preventDefault();
@@ -119,20 +75,28 @@ Template.videoModal.events({
 
     return false;
   },
-  'mouseover .progress': function(e) {
-    e.preventDefault();
-
-    $('.cursor-overlay').toggle();
+  'mouseenter .progress': function(e) {
+    animator.displayProgressOverlay();
+    animator.displayCommentPopup();
   },
-  'mouseout .progress': function(e) {
-    e.preventDefault();
-
-    $('.cursor-overlay').toggle();
-    $('.cursor-overlay').width(0);
+  'mouseleave .progress-bar': function(e) {
+    animator.hideProgressOverlay();
   },
   'mousemove .progress': function(e) {
-    e.preventDefault();
-    $('.cursor-overlay').width(e.pageX);
+    animator.moveProgressOverlay(e.pageX);
+    animator.moveCommentPopup(e.pageX);
+  },
+  'mouseenter .comment-popup': function() {
+    animator.hideProgressOverlay();
+  },
+  'click .comment-popup': function() {
+    if(!animator.commentFormToggled)
+      animator.displayCommentForm();
+    else
+      animator.hideCommentForm();
+  },
+  'mouseenter .navigation': function() {
+    animator.hideCommentPopup();
   },
   'click .navigation': function(e) {
     e.preventDefault();
@@ -141,27 +105,17 @@ Template.videoModal.events({
     else
       player.play();
   },
-  'mouseover .comments-bar, .controls': function(e) {
-    e.preventDefault();
-
-    if(timeout) {
-      clearTimeout(timeout);
-    }
+  'mouseenter .index': function(e) {
+    animator.displayChapterTitle();
   },
-  'mouseover .index': function() {
-    $('.navigation .text').show();
-  },
-  'mouseout .index': function() {
-    $('.navigation .text').hide();    
+  'mouseleave .index': function() {
+    animator.hideChapterTitle();    
   }
 });
 
-Template.videoModal.chapterTitle = function() {
-  if(!!Session.get('currentChapterId')) {
-    return Chapters.findOne(Session.get('currentChapterId')).title;
-  }
-};
-
+/*
+* NAVIGATION HELPERS
+*/ 
 var previousChapter = function() {
   //Map index for chapters
   var chapters = getChaptersWithIndex();
@@ -177,15 +131,6 @@ var previousChapter = function() {
   return chapters[current.index - 1];
 };
 
-Template.videoModal.chapterIndex = function() {
-  var chapters = getChaptersWithIndex();
-  var current = _.find(chapters, function(chapter) {
-    return chapter._id === Session.get('currentChapterId');
-  });
-  if(!!current)
-    return (current.index + 1) + " / " + chapters.length;
-}
-
 var nextChapter = function() {
   var chapters = getChaptersWithIndex();
 
@@ -196,32 +141,45 @@ var nextChapter = function() {
   return chapters[current.index + 1];
 };
 
-var createVideoProgressBar = function() {
+/**************
+* PLAYER EVENTS
+***************/
+var handlePlayerEvents = function() {
+  player.on('play', function() {
+    Session.set('duration', player.duration());
+    Session.set('playing', true);
+
+    //Reactive animation for chapter change
+    if(!!Session.get('currentChapterId')) {
+      animator.displayChapterTitle();
+      setTimeout(function() {
+        animator.hideChapterTitle(); 
+      }, 3000);
+    }
+  });
+
+  player.on('pause', function() {
+    Session.set('playing', false);
+  });
+
   player.on('timeupdate', function() {
     var currentTime = Math.floor(player.currentTime());
     //Green progress
     var value = currentTime/player.duration() * 100;
 
-    $('.progress-bar').attr('aria-valuenow', value);
-    $('.progress-bar').css('width', value + '%');
+    createProgressBar(value);
 
     if( !!Comments.findOne({time: currentTime}) ) {
       var comment = Comments.findOne({time: currentTime});
 
-      $('.discussion[data-id='+ comment._id +']').show().animate({
-        'top': '-336px',
-        'opacity': '1',
-        'z-index': '2'
-      }, 400);
-
-      Session.set('commentTimeout', Meteor.setTimeout(function() {
-        $('.discussion[data-id='+ comment._id +']').hide().animate({
-          top: '0px',
-          opacity: '0'
-        }, 400);
-      }, 4000));
+      animator.displayComment(comment._id);
+      animator.hideComment(comment._id);
 
     }
-
   });
+};
+
+var createProgressBar = function(value) {
+  $('.progress-bar').attr('aria-valuenow', value);  
+  $('.progress-bar').css('width', value + '%');
 };

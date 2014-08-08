@@ -8,18 +8,15 @@ Template.comment.helpers({
 });
 
 Template.comment.events({
-  'mouseover .discussion': function(e) {
+  'mouseenter .discussion': function(e) {
     e.preventDefault();
 
-    Meteor.clearTimeout(Session.get('commentTimeout'));  
-    $('.discussion[data-id='+ this._id +']').show();
+    animator.displayComment(this._id);
   },
-  'mouseout .discussion': function(e) {
+  'mouseleave .discussion': function(e) {
     e.preventDefault();
-    var id = $(e.target).data('id');
+    var commentId = $(e.target).data('id');
 
-    setTimeout(function() {
-      $('.discussion[data-id='+ id +']').hide();
-    }, 4000);
+    animator.hideComment(commentId);
   }
 });
