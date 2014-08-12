@@ -14,12 +14,20 @@
         font-size: 20px;
 font-style: normal;
 margin-left: 20px;
-}.flaticon-arrow395:before {
+}.flaticon-add50:before {
 	content: "\e000";
 }
-.flaticon-checkmark5:before {
+.flaticon-arrow395:before {
 	content: "\e001";
 }
-.flaticon-play36:before {
+.flaticon-checkmark5:before {
 	content: "\e002";
 }
+.flaticon-cross1:before {
+	content: "\e003";
+}
+.flaticon-play36:before {
+	content: "\e004";
+}
+
+

@@ -3,8 +3,8 @@
     <div class="modal-dialog modal-lg">
 
       <div class="navigation">
+          <div class='text'><div class="label"><div class="chapter">{{chapterIndex}}</div><div class="title">{{chapterTitle}}</div></div></div>
           <div class='flaticon-arrow395 previous-chapter'></div>
-          <div class='text'><span>{{chapterTitle}}</span></div>
           <div class='flaticon-arrow395 next-chapter'></div>
       </div>
 
@@ -15,12 +15,12 @@
 
               <div class="player"></div>
 
-              <div class="index">
-                <p>{{chapterIndex}}</p>
-              </div>
+              <!--<div class="index">
+                <p></p>
+              </div>-->
 
               <div class="exit">
-                <p>X</p>
+                <p>x</p>
               </div>
 
               <div class="controls">
@@ -38,15 +38,17 @@
                 </div>
               </div>
 
+              <div class="current-time">5:42</div>
+
               <div class="comments">{{> comments}}</div>
 
               <div class="comment-popup">
-                <p>O</p>
+                <span class="flaticon-cross1"></span>
               </div>
 
               <div class="comments-bar">
                 <div class="row post-comment">
-             <!--      <div class="play-pause">
+                <!--<div class="play-pause">
                     <span class="flaticon-play36 play"></span>
                     <span class="flaticon-play36 pause"></span>
                   </div> -->
@@ -59,6 +61,7 @@
                       <input class="form-control" name="body" type="text" placeholder="Entrer un commentaire..." />
                     </form>
                   </div>
+                  <div class="comments-close">x</div>
                 </div>
               </div>
               

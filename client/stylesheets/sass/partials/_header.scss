@@ -14,6 +14,11 @@
 			list-style: none;
 			padding-top:20px;
 			padding-right:20px;
+
+			.caret {
+				color: #fff;
+				margin-left: 6px;
+			}
 		}
 	}
 
@@ -23,6 +28,10 @@
 	
 	.dropdown-toggle{
 		display: inline-block;
+
+		&:hover {
+			text-decoration: none;
+		}
 
 		.icon {
 			height: 30px;
