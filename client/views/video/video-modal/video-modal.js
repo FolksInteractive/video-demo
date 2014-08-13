@@ -1,6 +1,9 @@
+var playerDependency = new Deps.Dependency();
+
 Template.videoModal.rendered = function() {
   var video = Videos.findOne(Session.get('currentVideoId'));
   player = Popcorn.youtube('.player', video.youtubeUrl);
+  playerDependency.changed();
 
   $('.modal').on('hidden.bs.modal', function () {
     player.pause();
@@ -22,6 +25,13 @@ Template.videoModal.helpers({
     });
     if(!!current)
       return (current.index + 1) + " / " + chapters.length;
+  },
+  'currentTime': function() {
+    playerDependency.depend();
+    var time = Math.round(player.currentTime());
+    var min = Math.round(time / 60);
+    var secs = (time % 60 < 10) ? (0 + ""+ (time % 60)) : (time % 60);
+    return min + ":" + secs;
   }
 });
 
@@ -30,12 +40,12 @@ Template.videoModal.events({
     e.preventDefault();
 
     var text = $(e.target).find('input[name=body]').val();
-
+    var time = Math.round(player.currentTime());
     var comment = Comments.insert({
       body: text,
       userId: Meteor.userId(),
       chapterId: Session.get('currentChapterId'),
-      time: Session.get('commentTime')
+      time: time
     }, function(err) {
       if(err)
         console.log(err);
@@ -73,14 +83,19 @@ Template.videoModal.events({
   },
   'mouseenter .progress': function(e) {
     animator.displayProgressOverlay();
+    animator.displayTimePopup();
     animator.displayCommentPopup();
+    animator.displayCommentCues();
   },
   'mouseleave .progress': function(e) {
     animator.hideProgressOverlay();
+    animator.hideTimePopup();
+    animator.hideCommentPopup();
+    animator.hideCommentCues();
   },
   'mousemove .progress': function(e) {
     animator.moveProgressOverlay(e.pageX);
-    animator.moveCommentPopup(e.pageX);
+    animator.moveTimePopup(e.pageX);
   },
   'mouseenter .comment-popup': function() {
     animator.hideProgressOverlay();
@@ -95,8 +110,11 @@ Template.videoModal.events({
     var time = getClickTime(xPos); 
     Session.set('commentTime', time);
   },
-  'mouseenter .navigation': function() {
-    animator.hideCommentPopup();
+  'mouseover .text': function() {
+    animator.displayChapterTitle();
+  },
+  'mouseleave .text': function() {
+    animator.hideChapterTitle();
   },
   'click .navigation': function(e) {
     e.preventDefault();
@@ -105,11 +123,8 @@ Template.videoModal.events({
     else
       player.play();
   },
-  'mouseenter .index': function(e) {
-    animator.displayChapterTitle();
-  },
-  'mouseleave .index': function() {
-    animator.hideChapterTitle();    
+  'click .comments-close': function() {
+    animator.hideCommentForm();
   }
 });
 
@@ -158,9 +173,7 @@ var handlePlayerEvents = function() {
     //Reactive animation for chapter change
     if(!!Session.get('currentChapterId')) {
       animator.displayChapterTitle();
-      setTimeout(function() {
-        animator.hideChapterTitle(); 
-      }, 3000);
+      animator.hideChapterTitle(); 
     }
   });
 
@@ -175,12 +188,16 @@ var handlePlayerEvents = function() {
 
     createProgressBar(value);
 
+    animator.moveCommentPopup(value * $('body').width() / 100);
+
     if( !!Comments.findOne({time: currentTime}) ) {
       var comment = Comments.findOne({time: currentTime});
 
       animator.displayComment(comment._id);
       animator.hideComment(comment._id);
     }
+
+    playerDependency.changed(); // Use to depend on time update also
   });
 };
 

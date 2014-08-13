@@ -66,10 +66,8 @@ var handleChapterChange = function() {
         Session.set('currentChapterId', 
           Chapters.findOne({'timeStamp': current})._id);
       
-        $('.navigation .text').fadeIn(500);
-        setTimeout(function() {
-          $('.navigation .text').fadeOut(500);  
-        }, 3000);
+        animator.displayChapterTitle();
+        animator.hideChapterTitle();
 
         updateSubscription();
       }

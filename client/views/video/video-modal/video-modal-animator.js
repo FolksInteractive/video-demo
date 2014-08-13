@@ -1,5 +1,5 @@
 ModalAnimator = function () {
-  this.popupTimeout;
+  this.chapterTimeout;
   this.commentTimeout;
   this.commentFormToggled = false;
 };
@@ -10,11 +10,14 @@ animator = new ModalAnimator();
 * Chapter Title
 */
 ModalAnimator.prototype.displayChapterTitle = function() {
-  $('.navigation .text').fadeIn(200);
+  Meteor.clearTimeout(animator.chapterTimeout);
+  $('.navigation').fadeIn(500);
 };
 
 ModalAnimator.prototype.hideChapterTitle = function() {
-  $('.navigation .text').fadeOut(200); 
+  this.chapterTimeout = Meteor.setTimeout(function() {
+    $('.navigation').fadeOut(1000);
+  }, 3000); 
 };
 
 /*
@@ -49,12 +52,24 @@ ModalAnimator.prototype.displayCommentPopup = function() {
 ModalAnimator.prototype.hideCommentPopup = function() {  
   this.popupTimeout = Meteor.setTimeout(function() {
     $('.comment-popup').hide(500);
-  }, 1000);
+  }, 500);
 };
 
 ModalAnimator.prototype.moveCommentPopup = function(xValue) {
-  // $('.comment-popup').show();
-  $('.comment-popup').css('left', xValue + "px");
+  $('.comment-popup').animate({
+    'left': xValue + "px"
+  }, 100, 'easeInOutQuart');
+};
+
+/*
+* Comment cues
+*/
+ModalAnimator.prototype.displayCommentCues = function() {
+  $('.comment-cue').fadeIn();
+};
+
+ModalAnimator.prototype.hideCommentCues = function() {
+  $('.comment-cue').fadeOut();
 };
 
 /*
@@ -73,6 +88,21 @@ ModalAnimator.prototype.moveProgressOverlay = function(xValue) {
 };
 
 /*
+* Current time popup 
+*/ 
+ModalAnimator.prototype.displayTimePopup = function() {
+  $('.current-time').fadeIn(500);
+};
+
+ModalAnimator.prototype.hideTimePopup = function() {  
+  $('.current-time').fadeOut(500);
+};
+
+ModalAnimator.prototype.moveTimePopup = function(xValue) {
+  $('.current-time').css('left', xValue + "px");
+}
+
+/*
 * Comment-form
 */
 ModalAnimator.prototype.displayCommentForm = function() {
@@ -85,9 +115,9 @@ ModalAnimator.prototype.displayCommentForm = function() {
     bottom: '0px'
   }, 500, 'easeInOutQuart');
   $('.comment-popup').animate({
-    bottom: '95px'
+    bottom: '97px'
   }, 500, 'easeInOutQuart');
-  $('.navigation').css('height', 'calc(100% - 80px)');  
+  // $('.navigation').css('height', 'calc(100% - 80px)');  
 
   this.commentFormToggled = true;
 };
@@ -100,9 +130,9 @@ ModalAnimator.prototype.hideCommentForm = function() {
     bottom: '-70px'
   }, 500, 'easeInOutQuart');
   $('.comment-popup').animate({
-    bottom: '25px'
+    bottom: '33px'
   }, 500, 'easeInOutQuart');
-  $('.navigation').css('height', 'calc(100% - 15px)');
+  // $('.navigation').css('height', 'calc(100% - 15px)');
 
   this.commentFormToggled = false;
 }
