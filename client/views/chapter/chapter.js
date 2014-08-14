@@ -6,8 +6,6 @@ Template.chapter.events({
     Session.set('currentChapterId',this._id);
     updateSubscription();
     handleChapterChange();
-
-    player.mute();
   }
 });
 

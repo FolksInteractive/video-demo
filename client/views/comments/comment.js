@@ -1,3 +1,4 @@
+var resizeDeps = new Deps.Dependency();
 Template.comments.helpers({
   'comments': function() {
     return Comments.find();
@@ -16,6 +17,7 @@ Template.comments.helpers({
     else if(pos >= ($('body').width() -300))
       return pos - 125;
 
+    resizeDeps.depend();
     return pos;
   },
   'arrowFix': function() {
@@ -48,3 +50,13 @@ Template.comments.events({
     animator.hideComment(commentId);
   }
 });
+
+Template.comments.created = function() {
+  $(window).resize(function() {
+    resizeDeps.changed();
+  });
+};
+
+Template.comments.destroyed = function() {
+  $(window).off('resize');
+};

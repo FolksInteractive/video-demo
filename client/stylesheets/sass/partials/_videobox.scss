@@ -136,7 +136,6 @@
     z-index: 25;
     cursor: pointer;
     padding-top: 2px;
-    display: none;
 
     .flaticon-cross1 {
       margin-left: -13px;
@@ -244,7 +243,7 @@
     position: absolute;
     width: 100%;
     z-index: 1;
-    height: calc(100% - 200px); 
+    top: 50%; 
 
     .text {
       position: absolute;
@@ -327,7 +326,7 @@
       top: -6px;
       z-index: 2;
       box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.7);
-      display: none;
+      opacity: 0.5;
     }
 
     .chapter-cue {
@@ -345,6 +344,8 @@
     bottom: 15px;
 
     .discussion {
+      bottom: -55px;
+      opacity: 0;
       width: 600px;
       position: absolute;
       right: 10%;

@@ -25,13 +25,6 @@ Template.videoModal.helpers({
     });
     if(!!current)
       return (current.index + 1) + " / " + chapters.length;
-  },
-  'currentTime': function() {
-    playerDependency.depend();
-    var time = Math.round(player.currentTime());
-    var min = Math.round(time / 60);
-    var secs = (time % 60 < 10) ? (0 + ""+ (time % 60)) : (time % 60);
-    return min + ":" + secs;
   }
 });
 
@@ -85,13 +78,11 @@ Template.videoModal.events({
     animator.displayProgressOverlay();
     animator.displayTimePopup();
     animator.displayCommentPopup();
-    animator.displayCommentCues();
   },
   'mouseleave .progress': function(e) {
     animator.hideProgressOverlay();
     animator.hideTimePopup();
     animator.hideCommentPopup();
-    animator.hideCommentCues();
   },
   'mousemove .progress': function(e) {
     animator.moveProgressOverlay(e.pageX);
