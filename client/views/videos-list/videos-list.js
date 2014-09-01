@@ -9,7 +9,7 @@ Template.videosList.helpers({
 });
 
 Template.videosList.events({
-  'click .person': function() {
+  'click .person-profile': function() {
     Router.go('video', {'id': this._id});
     //If user isn't already subscribed to the video create new subscription
     if(!Subscriptions.findOne({userId: Meteor.userId(), videoId: this._id}))

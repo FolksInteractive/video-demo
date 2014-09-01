@@ -1,11 +1,19 @@
-#video-box{
+#videoBox{
   overflow: hidden;
   height: 100%;
   width: 100%;
 
-  .modal-dialog {
+  .modal-dialog,
+  .modal-content,
+  .modal-body,
+  .container-fluid,
+  .row,
+  .player {
     height: 100%;
     width: 100%;
+  }
+
+  .modal-dialog {
     margin: 0;
   }
 
@@ -19,8 +27,6 @@
 
   .player{
     padding: 0;
-    height: 100%;
-    width: 100%;
   }
 
   .exit {

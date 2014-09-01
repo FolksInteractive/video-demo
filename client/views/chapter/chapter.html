@@ -3,7 +3,7 @@
     <div class="col-md-12 col-md-push-2">
       <div class="video-icon">
         {{#if completed}}
-          <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">
+          <a href="#" class="thumb checked" data-id="{{this._id}}" data-toggle="modal" data-target="#videoBox">
             <div class="status status-checked"><span class='flaticon flaticon-checkmark5'></span></div>
           </a>
         {{else}}
@@ -13,7 +13,7 @@
         {{/if}}
       </div>
       <div class="video-title">
-        <h3 class="title"><a href="#" data-id="{{this._id}}" data-toggle="modal" data-target="#video-box">{{title}}</a></h3>
+        <h3 class="title"><a href="#" data-id="{{this._id}}" data-toggle="modal" data-target="#videoBox">{{title}}</a></h3>
         <!--<p class="details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elit sit amet elit placerat sodales quis sed dolor. Quisque non malesuada metus...</p>-->
         <span class="comments">{{commentsAmount}} Commentaires</span>
       </div>
