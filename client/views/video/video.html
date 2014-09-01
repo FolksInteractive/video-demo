@@ -25,9 +25,20 @@
 
       <div class="videos-list">
         <div class="container">
-          {{#each chapters}}
-          {{> chapter}}
-          {{/each}}
+          <div class="chapter-description col-md-5 col-md-push-1">
+            <h3 class="titles">Description</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed tellus quis quam mattis blandit. Vestibulum laoreet augue ac tempus tincidunt. Sed at porttitor dolor. Ut non libero vel tellus condimentum volutpat.</p>
+
+            <p>Nullam nisi nunc, cursus vel auctor vel, luctus id massa. Mauris eros est, sollicitudin at cursus sit amet, luctus id augue. Praesent pellentesque sapien vel dolor commodo posuere et et urna. Nunc aliquet eros sit amet urna ultricies, quis posuere ante vehicula. Cras porttitor condimentum adipiscing. Phasellus sapien tortor, mollis vitae mollis a, sodales fermentum orci. Integer vestibulum pellentesque velit a volutpat. In vestibulum velit quis odio malesuada hendrerit. Sed egestas justo eu augue tempor condimentum.</p>
+
+            <h3 class="titles ressources">Ressources importantes</h3>
+          </div>
+          <div class="chapter-list col-md-9 col-md-push-2">
+            <h3 class="titles">Liste des chapitres</h3>
+            {{#each chapters}}
+            {{> chapter}}
+            {{/each}}
+          </div>
         </div>
       </div>
 

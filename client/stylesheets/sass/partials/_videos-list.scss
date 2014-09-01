@@ -119,8 +119,22 @@
 			text-decoration: none;
 		}
 
-		.person{
+		.rollover {
+			background: rgba(0, 0, 0, 0.4);
+			position: absolute;
+			top: 20px;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			z-index: 10;
+			display: none;
+		}
+
+		.person {
 			background-image:url(/img/person.png);
+		}
+
+		.video-box{
 			background-repeat: no-repeat;
 			background-size:cover;
 			height:245px;
@@ -145,6 +159,7 @@
 				text-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
 			}
 		}
+
 		.stats {
 			padding-left:0px;
 			text-align: center;
